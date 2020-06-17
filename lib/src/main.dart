@@ -1,6 +1,5 @@
 library wire;
 
-import 'dart:developer';
 import 'package:flutter/widgets.dart';
 import 'package:wire/wire.dart';
 
@@ -30,7 +29,6 @@ class _WireDataBuilderState extends State<WireDataBuilder> {
   void initState() {
     super.initState();
     Wire.data(widget.param).subscribe(this, (value) {
-      log('> WireDataBuilder: listen ${widget.param}: value = ${value}');
       setState(() { });
     });
   }
