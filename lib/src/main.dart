@@ -40,7 +40,7 @@ class _WireDataBuilderState extends State<WireDataBuilder> {
 
   @override
   void dispose() {
-    Wire.data(widget.param).unsubscribe(this);
+    if (widget != null) Wire.data(widget.param)?.unsubscribe(this);
     super.dispose();
   }
 }
