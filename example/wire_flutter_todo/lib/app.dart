@@ -12,11 +12,13 @@ class WireApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      key: UniqueKey(),
       onGenerateTitle: (context) => VanillaLocalizations.of(context).appTitle,
       theme: ArchSampleTheme.theme,
       localizationsDelegates: [
         VanillaLocalizationsDelegate(),
       ],
+      home: HomeScreen(),
       routes: {
         TodoRoutes.home: (context) => HomeScreen(),
         TodoRoutes.addTodo: (context) => AddEditScreen(),

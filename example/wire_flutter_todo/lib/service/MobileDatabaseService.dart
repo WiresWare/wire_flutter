@@ -12,7 +12,7 @@ class MobileDatabaseService extends IDatabaseService {
         'id': 1,
         'text': 'Read',
         'note': 'books, journals, articles',
-        'completed': false
+        'completed': true
       });
 
       jsonList.add({
