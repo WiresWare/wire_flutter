@@ -9,21 +9,21 @@ class MobileDatabaseService extends IDatabaseService {
   Future init([String key]) async {
 
       jsonList.add({
-        'id': 1,
+        'id': '1',
         'text': 'Read',
         'note': 'books, journals, articles',
         'completed': true
       });
 
       jsonList.add({
-        'id': 2,
+        'id': '2',
         'text': 'Write',
         'note': 'books, journals, articles',
         'completed': false
       });
 
       jsonList.add({
-        'id': 3,
+        'id': '3',
         'text': 'Travel',
         'note': 'London, New York, Paris',
         'completed': false

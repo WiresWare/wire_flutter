@@ -3,44 +3,48 @@ library wire;
 import 'package:flutter/widgets.dart';
 import 'package:wire/wire.dart';
 
-typedef WireDataWidgetBuilder<T> = Widget Function(BuildContext context, T value);
+typedef WireDataWidgetBuilder<T> = Widget Function(
+    BuildContext context, T value);
 
 /// WireDataBuilder
 class WireDataBuilder<T> extends StatefulWidget {
   WireDataBuilder({
     Key key,
-    @required this.param,
+    @required String param,
     @required this.builder,
-  }) :
-      assert(param != null),
-      assert(builder != null),
-      super(key: key);
+  })  : assert(param != null),
+        assert(builder != null),
+        super(key: key) {
+    wireData = Wire.data(param);
+  }
 
   final WireDataWidgetBuilder builder;
-  final String param;
+  WireData wireData;
 
   @override
   _WireDataBuilderState createState() => _WireDataBuilderState();
 }
 
 class _WireDataBuilderState extends State<WireDataBuilder> {
-
   @override
   void initState() {
     super.initState();
-    Wire.data(widget.param).subscribe(this, (value) {
-      setState(() { });
+    widget.wireData.subscribe(this, (value) {
+      setState(() {});
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return widget.builder(context, Wire.data(widget.param).value);
+    return widget.builder(context, widget.wireData?.value);
   }
 
   @override
   void dispose() {
-    if (widget != null) Wire.data(widget.param)?.unsubscribe(this);
+    if (widget != null) {
+      widget.wireData?.unsubscribe(this);
+      widget.wireData = null;
+    }
     super.dispose();
   }
 }
