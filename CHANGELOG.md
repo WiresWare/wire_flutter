@@ -1,3 +1,6 @@
+## 0.1.2
+- README and TodoMVC example updated with gif of how example works
+
 ## 0.1.1
 - WireData value stored in StatefulWidget State to keep it from become null on destroy of WireData object, nullify it on destroy of the component
 - Update TodoMVC example to match changes, also fixes.

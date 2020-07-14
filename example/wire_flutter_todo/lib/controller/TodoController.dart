@@ -27,18 +27,18 @@ class TodoController {
     });
     * */
 
-    Wire.add(this, TodoViewSignal.INPUT,  _SignalProcessor);
-    Wire.add(this, TodoViewSignal.EDIT,   _SignalProcessor);
-    Wire.add(this, TodoViewSignal.DELETE, _SignalProcessor);
-    Wire.add(this, TodoViewSignal.TOGGLE, _SignalProcessor);
-    Wire.add(this, TodoViewSignal.FILTER, _SignalProcessor);
-    Wire.add(this, TodoViewSignal.CLEAR_COMPLETED, _SignalProcessor);
-    Wire.add(this, TodoViewSignal.COMPLETE_ALL, _SignalProcessor);
+    Wire.add(this, TodoViewSignal.INPUT,  _signalProcessor);
+    Wire.add(this, TodoViewSignal.EDIT,   _signalProcessor);
+    Wire.add(this, TodoViewSignal.DELETE, _signalProcessor);
+    Wire.add(this, TodoViewSignal.TOGGLE, _signalProcessor);
+    Wire.add(this, TodoViewSignal.FILTER, _signalProcessor);
+    Wire.add(this, TodoViewSignal.CLEAR_COMPLETED, _signalProcessor);
+    Wire.add(this, TodoViewSignal.COMPLETE_ALL, _signalProcessor);
 
     print('Processor Ready');
   }
 
-  void _SignalProcessor(Wire wire, dynamic data) {
+  void _signalProcessor(Wire wire, dynamic data) {
     print('> TodoProcessor -> ${wire.signal}: data = ' + data.toString());
     switch (wire.signal) {
       case TodoViewSignal.INPUT:
