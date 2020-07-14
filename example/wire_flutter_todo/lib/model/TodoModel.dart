@@ -61,8 +61,10 @@ class TodoModel {
     todoWireData.remove();
 
     if (todoVO.completed == false) {
-      Wire.data(TodoDataParams.COUNT, count -1);
+      Wire.data(TodoDataParams.COUNT, count - 1);
     }
+    // Only difference with web version in Wire repositories (example TodoMVC)
+    Wire.data(TodoDataParams.LIST, todoList);
 
     _save();
 
