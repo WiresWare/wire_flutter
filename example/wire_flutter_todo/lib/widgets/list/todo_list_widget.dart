@@ -77,7 +77,7 @@ class TodoList extends StatelessWidget {
     Scaffold.of(context).showSnackBar(
       SnackBar(
         key: ArchSampleKeys.snackbar,
-        duration: Duration(seconds: 2),
+        duration: Duration(seconds: 3),
         content: Text(
           'Delete Todo: ${todoVO.text}',
           maxLines: 1,
@@ -85,7 +85,7 @@ class TodoList extends StatelessWidget {
         ),
         action: SnackBarAction(
           label: 'Undo',
-          onPressed: () => Wire.send(TodoViewSignal.INPUT, CreateDTO(todoVO.text, todoVO.note))
+          onPressed: () => Wire.send(TodoViewSignal.INPUT, CreateDTO(todoVO.text, todoVO.note, todoVO.completed))
         ),
       ),
     );

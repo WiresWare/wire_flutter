@@ -1,6 +1,6 @@
 name: wire_flutter
 description: Wire for Flutter widget - WireDataBuilder
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/wire-toolkit/wire_flutter
 
 environment:

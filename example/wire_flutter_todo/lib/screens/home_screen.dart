@@ -54,6 +54,7 @@ class HomeScreenState extends State<HomeScreen> {
                 allComplete: allCompleted,
                 hasCompletedTodos: hasCompletedTodos,
                 onSelected: (action) {
+                  print('> ExtraActionsButton -> action: $action');
                   if (action == ExtraAction.toggleAllComplete) {
                     Wire.send(TodoViewSignal.COMPLETE_ALL, !allCompleted);
                   } else if (action == ExtraAction.clearCompleted) {

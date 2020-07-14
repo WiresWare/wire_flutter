@@ -3,7 +3,7 @@
 // in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:wire_flutter_todo/enum//ExtraAction.dart';
+import 'package:wire_flutter_todo/enum/ExtraAction.dart';
 import 'package:wire_flutter_todo/const/ArchSampleKeys.dart';
 
 class ExtraActionsButton extends StatelessWidget {
@@ -28,7 +28,7 @@ class ExtraActionsButton extends StatelessWidget {
           key: ArchSampleKeys.toggleAll,
           value: ExtraAction.toggleAllComplete,
           child: Text(allComplete
-              ? 'Mark All Incomplete'
+              ? 'Incomplete All'
               : 'Complete All'),
         ),
         if (hasCompletedTodos) PopupMenuItem<ExtraAction>(
