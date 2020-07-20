@@ -1,3 +1,6 @@
+## 0.1.3
+- Update to much Wire version 0.9.1 where WireDataListener lost its first param - scope
+
 ## 0.1.2
 - README and TodoMVC example updated with gif of how example works
 

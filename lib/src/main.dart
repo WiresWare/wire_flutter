@@ -32,10 +32,12 @@ class _WireDataBuilderState extends State<WireDataBuilder> {
   void initState() {
     super.initState();
     this.value = widget.wireData.value;
-    widget.wireData.subscribe(this, (value) {
-      if (value != null) this.value = value;
-      setState(() {});
-    });
+    widget.wireData.subscribe(_onWireData);
+  }
+
+  void _onWireData(value) {
+    if (value != null) this.value = value;
+    setState(() {});
   }
 
   @override
@@ -46,7 +48,7 @@ class _WireDataBuilderState extends State<WireDataBuilder> {
   @override
   void dispose() {
     if (widget != null) {
-      widget.wireData?.unsubscribe(this);
+      widget.wireData?.unsubscribe(_onWireData);
       widget.wireData = null;
     }
     value = null;
