@@ -1,22 +1,20 @@
 import 'package:wire/wire.dart';
 
-import 'const/counter_params.dart';
-import 'const/counter_signals.dart';
+import 'const/CounterDataKey.dart';
+import 'const/CounterSignals.dart';
 
 class CounterProcessor {
   CounterProcessor() {
-    Wire.add(this, CounterSignal.INCREASE, (wire, data) {
+    Wire.add(this, CounterSignal.INCREASE, (data, wid) {
       print('> Processor: INCREASE -> handle: ' + data.toString());
-      Wire.data(CounterParams.COUNT, (value) {
+      Wire.data(CounterDataKey.COUNT, (value) {
         return value + 1;
       });
     });
 
-    Wire.add(this, CounterSignal.DECREASE, (wire, data) {
+    Wire.add(this, CounterSignal.DECREASE, (data, wid) {
       print('> Processor: DECREASE -> handle: ' + data.toString());
-      Wire.data(CounterParams.COUNT, (value) {
-        return value > 0 ? value - 1 : 0;
-      });
+      Wire.data(CounterDataKey.COUNT, (value) => value > 0 ? value - 1 : 0);
     });
 
     print('Processor Ready');

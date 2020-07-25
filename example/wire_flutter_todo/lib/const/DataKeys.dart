@@ -1,4 +1,4 @@
-class TodoDataParams {
+class DataKeys {
   static const String
     LIST = 'DATA_TODO__ALL_LIST',
     COUNT = 'DATA_TODO__NOT_COMPLETED_COUNT',

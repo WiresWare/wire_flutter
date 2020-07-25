@@ -1,5 +1,5 @@
 import 'package:wire/wire.dart';
-import '../const/DataParams.dart';
+import '../const/DataKeys.dart';
 import '../const/FilterValues.dart';
 import '../service/IDatabaseService.dart';
 import '../data/vo/TodoVO.dart';
@@ -28,22 +28,22 @@ class TodoModel {
     }
     print('> TodoModel list: ${idsList.length}');
     print('> TodoModel count: ${notCompletedCount}');
-    Wire.data(TodoDataParams.LIST, idsList);
-    Wire.data(TodoDataParams.COUNT, notCompletedCount);
+    Wire.data(DataKeys.LIST, idsList);
+    Wire.data(DataKeys.COUNT, notCompletedCount);
   }
 
   TodoVO create(String text, String note, bool completed) {
     final time = DateTime.now().millisecondsSinceEpoch;
     final id = time.toString();
     final todoVO = TodoVO(id, text, note, completed);
-    final listData = Wire.data(TodoDataParams.LIST);
+    final listData = Wire.data(DataKeys.LIST);
     final todoList = listData.value as List;
-    final count = Wire.data(TodoDataParams.COUNT).value as int;
+    final count = Wire.data(DataKeys.COUNT).value as int;
 
     todoList.add(todoVO.id);
     Wire.data(todoVO.id, todoVO);
-    Wire.data(TodoDataParams.LIST, todoList);
-    Wire.data(TodoDataParams.COUNT, count + (completed ? 0 : 1));
+    Wire.data(DataKeys.LIST, todoList);
+    Wire.data(DataKeys.COUNT, count + (completed ? 0 : 1));
 
     _save();
 
@@ -52,8 +52,8 @@ class TodoModel {
   }
 
   TodoVO remove(String id) {
-    final todoList = Wire.data(TodoDataParams.LIST).value as List;
-    final count = Wire.data(TodoDataParams.COUNT).value as int;
+    final todoList = Wire.data(DataKeys.LIST).value as List;
+    final count = Wire.data(DataKeys.COUNT).value as int;
     final todoWireData = Wire.data(id);
     final todoVO = todoWireData.value as TodoVO;
 
@@ -61,10 +61,10 @@ class TodoModel {
     todoWireData.remove();
 
     if (todoVO.completed == false) {
-      Wire.data(TodoDataParams.COUNT, count - 1);
+      Wire.data(DataKeys.COUNT, count - 1);
     }
     // Only difference with web version in Wire repositories (example TodoMVC)
-    Wire.data(TodoDataParams.LIST, todoList);
+    Wire.data(DataKeys.LIST, todoList);
 
     _save();
 
@@ -87,12 +87,12 @@ class TodoModel {
   TodoVO toggle(String id) {
     final todoWireData = Wire.data(id);
     final todoVO = todoWireData.value as TodoVO;
-    final count = Wire.data(TodoDataParams.COUNT).value as int;
+    final count = Wire.data(DataKeys.COUNT).value as int;
 
     todoVO.completed = !todoVO.completed;
 
     Wire.data(id, todoVO);
-    Wire.data(TodoDataParams.COUNT, count + (todoVO.completed ? -1 : 1));
+    Wire.data(DataKeys.COUNT, count + (todoVO.completed ? -1 : 1));
 
     _save();
 
@@ -101,7 +101,7 @@ class TodoModel {
   }
 
   void filter(TodoFilterValue filter) {
-    final todoList = Wire.data(TodoDataParams.LIST).value as List;
+    final todoList = Wire.data(DataKeys.LIST).value as List;
     todoList.forEach((id) {
       var todoWireData = Wire.data(id);
       var todoVO = todoWireData.value as TodoVO;
@@ -116,13 +116,13 @@ class TodoModel {
         Wire.data(id, todoVO);
       }
     });
-    Wire.data(TodoDataParams.FILTER, filter);
+    Wire.data(DataKeys.FILTER, filter);
     print('> TodoModel -> filtered: ' + filter.toString());
   }
 
   void setCompletionToAll(value) {
-    final todoList = Wire.data(TodoDataParams.LIST).value as List;
-    var count = Wire.data(TodoDataParams.COUNT).value as int;
+    final todoList = Wire.data(DataKeys.LIST).value as List;
+    var count = Wire.data(DataKeys.COUNT).value as int;
     print('> TodoModel -> setCompletionToAll: $value - ' + count.toString());
     todoList.forEach((id) {
       var todoWireData = Wire.data(id);
@@ -133,12 +133,12 @@ class TodoModel {
         Wire.data(id, todoVO);
       }
     });
-    Wire.data(TodoDataParams.COUNT, count);
+    Wire.data(DataKeys.COUNT, count);
     _save();
   }
 
   void clearCompleted() {
-    final todoList = Wire.data(TodoDataParams.LIST).value as List;
+    final todoList = Wire.data(DataKeys.LIST).value as List;
     todoList.removeWhere((id) {
       var todoWireData = Wire.data(id);
       var todoVO = todoWireData.value as TodoVO;
@@ -147,14 +147,14 @@ class TodoModel {
       }
       return todoVO.completed;
     });
-    Wire.data(TodoDataParams.LIST, todoList);
+    Wire.data(DataKeys.LIST, todoList);
     _save();
     print('> TodoModel -> clearCompleted: length = ' + todoList.length.toString());
   }
 
   void _save() {
     var listToSave = <TodoVO>[];
-    (Wire.data(TodoDataParams.LIST).value as List).forEach((id) =>
+    (Wire.data(DataKeys.LIST).value as List).forEach((id) =>
       listToSave.add(Wire.data(id).value)
     );
     _dbService.save(LOCAL_STORAGE_KEY, listToSave);

@@ -5,14 +5,14 @@ import 'package:wire/wire.dart';
 import 'package:wire_flutter/wire_flutter.dart';
 
 import 'CounterProcessor.dart';
-import 'const/counter_signals.dart';
-import 'const/counter_params.dart';
+import 'const/CounterSignals.dart';
+import 'const/CounterDataKey.dart';
 
 var processor;
 
 void main() {
   processor = CounterProcessor();
-  Wire.data(CounterParams.COUNT, 0);
+  Wire.data(CounterDataKey.COUNT, 0);
   runApp(MyApp());
 }
 
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             WireDataBuilder<int>(
-              param: CounterParams.COUNT,
+              dataKey: CounterDataKey.COUNT,
               builder: (context, value) => Text(
                   '$value',
                   style: Theme.of(context).textTheme.headline4,

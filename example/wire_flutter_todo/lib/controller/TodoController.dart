@@ -38,7 +38,8 @@ class TodoController {
     print('Processor Ready');
   }
 
-  void _signalProcessor(Wire wire, dynamic data) {
+  void _signalProcessor(dynamic data, int wid) {
+    var wire = Wire.get(wid: wid).single;
     print('> TodoProcessor -> ${wire.signal}: data = ' + data.toString());
     switch (wire.signal) {
       case TodoViewSignal.INPUT:

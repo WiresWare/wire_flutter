@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:wire/wire.dart';
 
 import 'app.dart';
-import 'const/DataParams.dart';
+import 'const/DataKeys.dart';
 import 'const/ApplicationState.dart';
 import 'controller/TodoController.dart';
 import 'model/TodoModel.dart';
@@ -18,7 +18,7 @@ var todoController;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Wire.data(TodoDataParams.STATE, TodoApplicationState.LOADING);
+  Wire.data(DataKeys.STATE, TodoApplicationState.LOADING);
 
   var databaseService = MobileDatabaseService();
   await databaseService.init(TodoModel.LOCAL_STORAGE_KEY);
@@ -28,5 +28,5 @@ Future<void> main() async {
 
   runApp(WireApp());
 
-  Wire.data(TodoDataParams.STATE, TodoApplicationState.READY);
+  Wire.data(DataKeys.STATE, TodoApplicationState.READY);
 }

@@ -3,7 +3,7 @@
 // in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:wire_flutter_todo/const/DataParams.dart';
+import 'package:wire_flutter_todo/const/DataKeys.dart';
 import 'package:wire_flutter_todo/const/ArchSampleKeys.dart';
 import 'package:wire_flutter_todo/const/ViewSignal.dart';
 import 'package:wire_flutter_todo/const/ApplicationState.dart';
@@ -14,7 +14,7 @@ import 'package:wire_flutter_todo/widgets/list/todo_item_widget.dart';
 import 'package:wire/wire.dart';
 import 'package:wire_flutter/wire_flutter.dart';
 
-import '../../const/DataParams.dart';
+import '../../const/DataKeys.dart';
 
 class TodoList extends StatelessWidget {
 
@@ -23,7 +23,7 @@ class TodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WireDataBuilder<TodoApplicationState>(
-      param: TodoDataParams.STATE,
+      dataKey: DataKeys.STATE,
       builder: (context, state) => Container(
         child: state == TodoApplicationState.LOADING
             ? Center(
@@ -31,7 +31,7 @@ class TodoList extends StatelessWidget {
                 key: ArchSampleKeys.todosLoading,
               ))
             : WireDataBuilder<List<String>>(
-                param: TodoDataParams.LIST,
+                dataKey: DataKeys.LIST,
                 builder: (context, list) => ListView.builder(
                   key: ArchSampleKeys.todoList,
                   itemCount: list.length,

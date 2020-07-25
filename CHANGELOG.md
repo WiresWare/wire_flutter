@@ -1,3 +1,8 @@
+## 0.9.0 (pre-release)
+- Changes in example according changes in version 0.9.7 of Wire.
+- Renaming to match library concepts - `dataKey` replaced `param` in `Wire.data`
+- Internal library changes, no impact on how it used. Keep `dataKey` string constant instead of `WireData` instance in the StatefulWidget, use it in the `initState` function to retrieve value and subscribe to updates, later unsubscribe with this `dataKey`.
+
 ## 0.1.3
 - Update to much Wire version 0.9.1 where WireDataListener lost its first param - scope
 

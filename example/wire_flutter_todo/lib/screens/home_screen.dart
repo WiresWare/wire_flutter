@@ -8,7 +8,7 @@ import 'package:wire_flutter_todo/const/ArchSampleKeys.dart';
 import 'package:wire_flutter/wire_flutter.dart';
 import 'package:wire_flutter_todo/enum/AppTab.dart';
 import 'package:wire_flutter_todo/enum/ExtraAction.dart';
-import 'package:wire_flutter_todo/const/DataParams.dart';
+import 'package:wire_flutter_todo/const/DataKeys.dart';
 import 'package:wire_flutter_todo/const/FilterValues.dart';
 import 'package:wire_flutter_todo/const/ViewSignal.dart';
 import 'package:wire_flutter_todo/localization.dart';
@@ -45,9 +45,9 @@ class HomeScreenState extends State<HomeScreen> {
             onSelected: (filter) => Wire.send(TodoViewSignal.FILTER, filter),
           ),
           WireDataBuilder<int>(
-            param: TodoDataParams.COUNT,
+            dataKey: DataKeys.COUNT,
             builder: (context, notCompletedCount) {
-              var allTodoCount = Wire.data(TodoDataParams.LIST).value.length;
+              var allTodoCount = Wire.data(DataKeys.LIST).value.length;
               var allCompleted = notCompletedCount == 0 && allTodoCount > 0;
               var hasCompletedTodos = (allTodoCount - notCompletedCount) > 0;
               return ExtraActionsButton(
