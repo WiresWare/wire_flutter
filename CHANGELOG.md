@@ -1,4 +1,7 @@
-## 0.9.0 (pre-release)
+## 0.9.1 (todo example - shared code)
+- Working example of using different UI - Flutter (mobile and web) and custom HTML/JS in Todo example. Special scripts provided to build for all three examples - open Flutter project from folder `example/wire_flutter_todo`.
+
+## 0.9.0
 - Changes in example according changes in version 0.9.7 of Wire.
 - Renaming to match library concepts - `dataKey` replaced `param` in `Wire.data`
 - Internal library changes, no impact on how it used. Keep `dataKey` string constant instead of `WireData` instance in the StatefulWidget, use it in the `initState` function to retrieve value and subscribe to updates, later unsubscribe with this `dataKey`.

@@ -1,0 +1,23 @@
+{
+  "name": "wire_flutter_todo",
+  "version": "1.0.0",
+  "description": "The wire_flutter_todo example uses only the core Widgets and Classes that Flutter provides out of the box to manage state. The most important of these: the `StatefulWidget`.",
+  "main": "gruntfile.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.2.1",
+    "grunt-contrib-connect": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-exec": "*",
+    "load-grunt-tasks": "*",
+    "time-grunt": "*"
+  }
+}

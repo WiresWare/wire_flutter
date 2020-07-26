@@ -1,6 +1,6 @@
 name: wire_flutter
 description: Data container layer from Wire for Flutter - WireDataBuilder widget
-version: 0.9.0
+version: 0.9.1
 homepage: https://github.com/wire-toolkit/wire_flutter
 
 environment:
