@@ -34,6 +34,7 @@ Wire.add(this, CounterSignal.INCREASE, (signal, data) {
 
 ### TodoMVC Examle (based https://github.com/brianegan/flutter_architecture_samples)
 ![TodoMVC Flutter Architecture Samples](assets/wire_flutter_example_todo.gif)
+![TodoMVC Web with shared code](https://github.com/wire-toolkit/wire_dart/raw/master/assets/wire_example_todo_web.gif)
 
 Create list from parameter `TodoDataParams.LIST` which is a list of TodoVO ids stored in Wire.data as separate objects
 ```dart
