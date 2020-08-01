@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:wire-toolkit/wire_dart.git
+	branch = subrepo/example/_shared
+	commit = d241c5d07dc2a5374a70cc8ba88262d671df54ed
+	parent = 854d5c12d295317918b634297b7e5d845876f8b2
+	method = merge
+	cmdver = 0.4.1
