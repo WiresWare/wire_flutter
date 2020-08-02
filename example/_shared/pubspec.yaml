@@ -1,0 +1,12 @@
+name: wire_example_shared
+description: examples shared code
+version: 0.0.1
+# publish_to: none
+
+environment:
+  sdk: '>=2.4.0 <3.0.0'
+
+dependencies:
+  wire: ^0.9.7
+
+dev_dependencies:
