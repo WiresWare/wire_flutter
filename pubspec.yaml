@@ -10,11 +10,12 @@ dependencies:
   flutter:
     sdk: flutter
   wire: ^0.9.7
+  wire_example_shared:
+    path: example/_shared
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

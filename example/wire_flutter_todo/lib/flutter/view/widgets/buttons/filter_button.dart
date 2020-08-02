@@ -3,7 +3,7 @@
 // in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:wire_flutter_todo/_shared/const/FilterValues.dart';
+import 'package:wire_example_shared/todo/const/FilterValues.dart';
 import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
 
 class FilterButton extends StatelessWidget {

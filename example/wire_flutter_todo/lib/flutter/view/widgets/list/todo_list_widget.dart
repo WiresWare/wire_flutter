@@ -3,12 +3,12 @@
 // in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:wire_flutter_todo/_shared/const/DataKeys.dart';
+import 'package:wire_example_shared/todo/const/DataKeys.dart';
 import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
-import 'package:wire_flutter_todo/_shared/const/ViewSignals.dart';
-import 'package:wire_flutter_todo/_shared/const/ApplicationState.dart';
-import 'package:wire_flutter_todo/_shared/data/dto/CreateDTO.dart';
-import 'package:wire_flutter_todo/_shared/data/vo/TodoVO.dart';
+import 'package:wire_example_shared/todo/const/ViewSignals.dart';
+import 'package:wire_example_shared/todo/const/ApplicationState.dart';
+import 'package:wire_example_shared/todo/data/dto/InputDTO.dart';
+import 'package:wire_example_shared/todo/data/vo/TodoVO.dart';
 import 'package:wire_flutter_todo/flutter/view/screens/detail_screen.dart';
 import 'package:wire_flutter_todo/flutter/view/widgets/list/todo_item_widget.dart';
 import 'package:wire/wire.dart';
@@ -83,7 +83,7 @@ class TodoList extends StatelessWidget {
         ),
         action: SnackBarAction(
           label: 'Undo',
-          onPressed: () => Wire.send(ViewSignals.INPUT, CreateDTO(todoVO.text, todoVO.note, todoVO.completed))
+          onPressed: () => Wire.send(ViewSignals.INPUT, InputDTO(todoVO.text, todoVO.note, todoVO.completed))
         ),
       ),
     );

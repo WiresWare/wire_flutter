@@ -5,7 +5,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
-import 'package:wire_flutter_todo/_shared/data/vo/TodoVO.dart';
+import 'package:wire_example_shared/todo/data/vo/TodoVO.dart';
 import 'package:wire_flutter/wire_flutter.dart';
 
 class TodoItem extends StatelessWidget {

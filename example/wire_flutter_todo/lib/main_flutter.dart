@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:wire/wire.dart';
 
-import 'package:wire_flutter_todo/_shared/service/MobileDatabaseService.dart';
+import 'package:wire_example_shared/todo/service/MobileDatabaseService.dart';
 import 'package:wire_flutter_todo/flutter/app.dart';
 
-import '_shared/const/DataKeys.dart';
-import '_shared/const/ApplicationState.dart';
-import '_shared/controller/TodoController.dart';
-import '_shared/model/TodoModel.dart';
-import '_shared/service/IDatabaseService.dart';
+import 'package:wire_example_shared/todo/const/DataKeys.dart';
+import 'package:wire_example_shared/todo/const/ApplicationState.dart';
+import 'package:wire_example_shared/todo/controller/TodoController.dart';
+import 'package:wire_example_shared/todo/model/TodoModel.dart';
+import 'package:wire_example_shared/todo/service/IDatabaseService.dart';
 
 var todoModel;
 var todoController;

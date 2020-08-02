@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wire/wire.dart';
 import 'package:wire_flutter/wire_flutter.dart';
-import 'package:wire_flutter_todo/_shared/const/DataKeys.dart';
+import 'package:wire_example_shared/todo/const/DataKeys.dart';
 import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
 
 class StatsCounter extends StatelessWidget {

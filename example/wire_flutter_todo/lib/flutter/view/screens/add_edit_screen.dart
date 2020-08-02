@@ -6,10 +6,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:wire_flutter/wire_flutter.dart';
-import 'package:wire_flutter_todo/_shared/data/vo/TodoVO.dart';
-import 'package:wire_flutter_todo/_shared/data/dto/EditDTO.dart';
-import 'package:wire_flutter_todo/_shared/data/dto/CreateDTO.dart';
-import 'package:wire_flutter_todo/_shared/const/ViewSignals.dart';
+import 'package:wire_example_shared/todo/data/vo/TodoVO.dart';
+import 'package:wire_example_shared/todo/data/dto/EditDTO.dart';
+import 'package:wire_example_shared/todo/data/dto/InputDTO.dart';
+import 'package:wire_example_shared/todo/const/ViewSignals.dart';
 import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
 import 'package:wire/wire.dart';
 
@@ -69,7 +69,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
               if (isEditing) {
                 Wire.send(ViewSignals.EDIT, EditDTO(widget.id, _text, _note));
               } else {
-                Wire.send(ViewSignals.INPUT, CreateDTO(_text, _note));
+                Wire.send(ViewSignals.INPUT, InputDTO(_text, _note));
               }
 
               Navigator.pop(context);

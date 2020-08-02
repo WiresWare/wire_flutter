@@ -1,12 +1,12 @@
 import 'dart:html';
 
 import 'package:wire/wire.dart';
-import 'package:wire_flutter_todo/_shared/middleware/TodoMiddleware.dart';
 
-import 'package:wire_flutter_todo/_shared/service/WebDatabaseService.dart';
 import 'package:wire_flutter_todo/web/app.dart';
-import '_shared/controller/TodoController.dart';
-import '_shared/model/TodoModel.dart';
+import 'package:wire_example_shared/todo/middleware/TodoMiddleware.dart';
+import 'package:wire_example_shared/todo/model/TodoModel.dart';
+import 'package:wire_example_shared/todo/service/WebDatabaseService.dart';
+import 'package:wire_example_shared/todo/controller/TodoController.dart';
 import 'web/controller/RouteController.dart';
 
 var todoModel;

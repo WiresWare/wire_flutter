@@ -1,8 +1,8 @@
 import 'dart:html';
 
 import 'package:wire/wire.dart';
-import 'package:wire_flutter_todo/_shared/const/DataKeys.dart';
-import 'package:wire_flutter_todo/_shared/const/ViewSignals.dart';
+import 'package:wire_example_shared/todo/const/DataKeys.dart';
+import 'package:wire_example_shared/todo/const/ViewSignals.dart';
 
 import 'base/DomElementView.dart';
 

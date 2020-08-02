@@ -1,8 +1,8 @@
 import 'dart:html';
 
 import 'package:wire/wire.dart';
-import 'package:wire_flutter_todo/_shared/const/FilterValues.dart';
-import 'package:wire_flutter_todo/_shared/const/ViewSignals.dart';
+import 'package:wire_example_shared/todo/const/FilterValues.dart';
+import 'package:wire_example_shared/todo/const/ViewSignals.dart';
 
 class RouteController {
   RouteController() {
