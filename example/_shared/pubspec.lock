@@ -4,9 +4,9 @@ packages:
   wire:
     dependency: "direct main"
     description:
-      name: wire
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.8"
+      path: "../.."
+      relative: true
+    source: path
+    version: "1.0.0"
 sdks:
   dart: ">=2.4.0 <3.0.0"

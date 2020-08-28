@@ -19,7 +19,7 @@ class TodoModel {
         _dbService.retrieve(LOCAL_STORAGE_KEY).forEach((obj){
           if (obj != null) {
             var todoVO = TodoVO.fromJson(obj);
-            Wire.data(todoVO.id, todoVO);
+            Wire.data<TodoVO>(todoVO.id, todoVO);
             idsList.add(todoVO.id);
             if (!todoVO.completed) notCompletedCount++;
           }
@@ -30,8 +30,8 @@ class TodoModel {
     }
     print('> TodoModel list: ${idsList.length}');
     print('> TodoModel count: ${notCompletedCount}');
-    Wire.data(DataKeys.LIST, idsList);
-    Wire.data(DataKeys.COUNT, notCompletedCount);
+    Wire.data<List<String>>(DataKeys.LIST, idsList);
+    Wire.data<int>(DataKeys.COUNT, notCompletedCount);
   }
 
   TodoVO create(String text, String note, bool completed) {
@@ -40,12 +40,12 @@ class TodoModel {
     final todoVO = TodoVO(id, text, note, completed);
     final listData = Wire.data(DataKeys.LIST);
     final todoList = listData.value as List;
-    final count = Wire.data(DataKeys.COUNT).value as int;
+    final count = Wire.data<int>(DataKeys.COUNT).value;
 
     todoList.add(todoVO.id);
-    Wire.data(todoVO.id, todoVO);
-    Wire.data(DataKeys.LIST, todoList);
-    Wire.data(DataKeys.COUNT, count + (completed ? 0 : 1));
+    Wire.data<TodoVO>(todoVO.id, todoVO);
+    Wire.data<List<String>>(DataKeys.LIST, todoList);
+    Wire.data<int>(DataKeys.COUNT, count + (completed ? 0 : 1));
 
     _save();
 
@@ -54,10 +54,10 @@ class TodoModel {
   }
 
   TodoVO remove(String id) {
-    final todoList = Wire.data(DataKeys.LIST).value as List;
-    final count = Wire.data(DataKeys.COUNT).value as int;
-    final todoWireData = Wire.data(id);
-    final todoVO = todoWireData.value as TodoVO;
+    final todoList = Wire.data<List<String>>(DataKeys.LIST).value;
+    final count = Wire.data<int>(DataKeys.COUNT).value as int;
+    final todoWireData = Wire.data<TodoVO>(id);
+    final todoVO = todoWireData.value;
 
     todoList.remove(id);
     todoWireData.remove();
@@ -68,7 +68,7 @@ class TodoModel {
 
     if (_isFlutter) {
       // Only difference with web version in Wire repositories (example TodoMVC)
-      Wire.data(DataKeys.LIST, todoList);
+      Wire.data<List<String>>(DataKeys.LIST, todoList);
     }
 
     _save();
@@ -78,11 +78,12 @@ class TodoModel {
   }
 
   TodoVO update(String id, String text, String note) {
-    final todoWireData = Wire.data(id);
-    final todoVO = todoWireData.value as TodoVO;
+    final todoWireData = Wire.data<TodoVO>(id);
+    final todoVO = todoWireData.value;
     todoVO.text = text;
     todoVO.note = note;
-    Wire.data(id, todoVO);
+    // Wire.data<TodoVO>(id, todoVO);
+    todoWireData.refresh();
     _save();
 
     print('> TodoModel -> updated: ' + todoVO.id + ' - ' + todoVO.text);

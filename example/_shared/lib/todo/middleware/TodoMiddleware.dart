@@ -17,7 +17,7 @@ class TodoMiddleware extends WireMiddleware {
   }
 
   @override
-  void onSend(String signal, [data]) {
-    print('> TodoMiddleware -> onSend: signal = ${signal} | data = ${data}');
+  void onSend(String signal, [data, scope]) {
+    print('> TodoMiddleware -> onSend: signal = ${signal} | data = ${data} | scope = ${scope}');
   }
 }
