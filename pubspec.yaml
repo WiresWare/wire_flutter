@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  wire: ^0.9.7
+  wire: ^1.0.0
   wire_example_shared:
     path: example/_shared
 

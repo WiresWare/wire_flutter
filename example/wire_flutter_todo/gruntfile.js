@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 			}
 		},
 		exec: {
-			copy_assets_for_web: '[[ -d web ]] && rm -r web & mkdir web & cp -r assets/web ./',
+			copy_assets_for_web: '[[ -d web ]] && rm -rf web & mkdir web & cp -r assets/web ./',
 			rebuild_and_run_reload: 'sh ./build_web.sh && ((echo >/dev/tcp/localhost/8889) &>/dev/null && echo "TCP port 8889 open" || reload -p 8889 -b -d ./web &)'
 		}
 	});

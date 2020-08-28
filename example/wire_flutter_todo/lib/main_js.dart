@@ -19,7 +19,7 @@ void main() {
   /* Work in progress */
   _wire_send = allowInterop(Wire.send);
   _wire_data = allowInterop(Wire.data);
+
   Wire.middleware(TodoMiddleware());
-  var todoModel = TodoModel(WebDatabaseService(), isFlutter: false);
-  TodoController(todoModel);
+  TodoController(TodoModel(WebDatabaseService(), isFlutter: false));
 }
