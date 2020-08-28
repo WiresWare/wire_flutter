@@ -1,3 +1,8 @@
+## 0.9.4 (wire release version 1.0.0)
+- Update to release version of Wire
+- WireDataBuilder with types <T>
+- Guarder dispose on empty value (when WireData was not set before requested from widget, then it must be removed)
+
 ## 0.9.1 (todo example - shared code)
 - Working example of using different UI - Flutter (mobile and web) and custom HTML/JS in Todo example. Special scripts provided to build for all three examples - open Flutter project from folder `example/wire_flutter_todo`.
 
