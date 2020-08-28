@@ -48,7 +48,7 @@ class DetailScreen extends StatelessWidget {
                   padding: EdgeInsets.only(right: 8.0),
                   child: Checkbox( value: todoVO.completed,
                     key: ArchSampleKeys.detailsTodoItemCheckbox,
-                    onChanged: (value) => Wire.send(ViewSignals.TOGGLE, id),
+                    onChanged: (value) => Wire.send(ViewSignals.TOGGLE, payload: id),
                   ),
                 ),
                 Expanded(

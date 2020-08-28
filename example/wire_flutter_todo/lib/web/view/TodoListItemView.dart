@@ -30,10 +30,10 @@ class TodoListItemView extends DomElement {
   TodoListItemView(String id):super(LIElement()) {
 
     listeners.addAll([
-      inpToggle.onClick.listen((e) => Wire.send(ViewSignals.TOGGLE, id)),
-      btnDelete.onClick.listen((e) => Wire.send(ViewSignals.DELETE, id)),
+      inpToggle.onClick.listen((e) => Wire.send(ViewSignals.TOGGLE, payload: id)),
+      btnDelete.onClick.listen((e) => Wire.send(ViewSignals.DELETE, payload: id)),
       inpEdit.onKeyDown.listen((e) {
-        if (e.keyCode == KeyCode.ENTER) { Wire.send(ViewSignals.EDIT, getEditData()); }
+        if (e.keyCode == KeyCode.ENTER) { Wire.send(ViewSignals.EDIT, payload: getEditData()); }
         else if (e.keyCode == KeyCode.ESC) _OnEditCancel();
       }),
 

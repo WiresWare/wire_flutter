@@ -20,16 +20,16 @@ class WireDataBuilder<T> extends StatefulWidget {
   final WireDataWidgetBuilder builder;
 
   @override
-  _WireDataBuilderState createState() => _WireDataBuilderState();
+  _WireDataBuilderState<T> createState() => _WireDataBuilderState<T>();
 }
 
-class _WireDataBuilderState extends State<WireDataBuilder> {
+class _WireDataBuilderState<T> extends State<WireDataBuilder> {
   var value;
 
   @override
   void initState() {
     super.initState();
-    var wireData = Wire.data(widget.dataKey);
+    var wireData = Wire.data<T>(widget.dataKey);
     this.value = wireData.value;
     wireData.subscribe(_onWireData);
   }
@@ -47,8 +47,10 @@ class _WireDataBuilderState extends State<WireDataBuilder> {
   @override
   void dispose() {
     if (widget != null) {
-      var wireData = Wire.data(widget.dataKey);
-      wireData?.unsubscribe(_onWireData);
+      var wireData = Wire.data<T>(widget.dataKey);
+      if (!wireData.isSet && wireData.value == null)
+        wireData.remove();
+      else wireData?.unsubscribe(_onWireData);
     }
     value = null;
     super.dispose();

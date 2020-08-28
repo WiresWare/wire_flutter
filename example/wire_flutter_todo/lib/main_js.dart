@@ -13,7 +13,7 @@ var todoController;
 @JS('wire_data')
 external set _wire_data(void Function(String dataKey, [dynamic value]) f);
 @JS('wire_send')
-external set _wire_send(void Function(String signal, [dynamic data]) f);
+external set _wire_send(void Function(String signal, {dynamic payload, Object scope}) f);
 
 void main() {
   /* Work in progress */

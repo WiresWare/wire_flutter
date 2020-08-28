@@ -56,8 +56,11 @@ class TodoList extends StatelessWidget {
                             ),
                           );
                         },
-                        onToggle: (value) =>
-                          Wire.send(ViewSignals.TOGGLE, todoId),
+                        onToggle: (value)
+                        {
+                          print('> TodoItem click $todoId');
+                          Wire.send(ViewSignals.TOGGLE, payload: todoId);
+                        }
                       ),
                     );
                   },
@@ -70,7 +73,7 @@ class TodoList extends StatelessWidget {
   void _removeTodo(BuildContext context, String todoId) {
     var todoWireData = Wire.data(todoId);
     TodoVO todoVO = todoWireData.value;
-    Wire.send(ViewSignals.DELETE, todoId);
+    Wire.send(ViewSignals.DELETE, payload: todoId);
 
     Scaffold.of(context).showSnackBar(
       SnackBar(
@@ -83,7 +86,13 @@ class TodoList extends StatelessWidget {
         ),
         action: SnackBarAction(
           label: 'Undo',
-          onPressed: () => Wire.send(ViewSignals.INPUT, InputDTO(todoVO.text, todoVO.note, todoVO.completed))
+          onPressed: () =>
+            Wire.send(ViewSignals.INPUT,
+              payload: InputDTO(
+                  todoVO.text,
+                  todoVO.note,
+                  todoVO.completed
+              ))
         ),
       ),
     );

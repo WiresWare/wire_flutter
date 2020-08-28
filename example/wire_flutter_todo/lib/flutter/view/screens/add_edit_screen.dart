@@ -67,9 +67,9 @@ class _AddEditScreenState extends State<AddEditScreen> {
               form.save();
 
               if (isEditing) {
-                Wire.send(ViewSignals.EDIT, EditDTO(widget.id, _text, _note));
+                Wire.send(ViewSignals.EDIT, payload: EditDTO(widget.id, _text, _note));
               } else {
-                Wire.send(ViewSignals.INPUT, InputDTO(_text, _note));
+                Wire.send(ViewSignals.INPUT, payload: InputDTO(_text, _note));
               }
 
               Navigator.pop(context);

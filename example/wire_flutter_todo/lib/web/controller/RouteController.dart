@@ -19,6 +19,6 @@ class RouteController {
       case '#/active': filter = FilterValues.ACTIVE; break;
       case '#/completed': filter = FilterValues.COMPLETED; break;
     }
-    if (filter != null) Wire.send(ViewSignals.FILTER, filter);
+    if (filter != null) Wire.send(ViewSignals.FILTER, payload: filter);
   }
 }

@@ -41,7 +41,7 @@ class HomeScreenState extends State<HomeScreen> {
           FilterButton(
             isActive: activeTab == AppTab.todos,
             activeFilter: FilterValues.ALL,
-            onSelected: (filter) => Wire.send(ViewSignals.FILTER, filter),
+            onSelected: (filter) => Wire.send(ViewSignals.FILTER, payload: filter),
           ),
           WireDataBuilder<int>(
             dataKey: DataKeys.COUNT,
@@ -55,7 +55,7 @@ class HomeScreenState extends State<HomeScreen> {
                 onSelected: (action) {
                   print('> ExtraActionsButton -> action: $action');
                   if (action == ExtraAction.toggleAllComplete) {
-                    Wire.send(ViewSignals.COMPLETE_ALL, !allCompleted);
+                    Wire.send(ViewSignals.COMPLETE_ALL, payload: !allCompleted);
                   } else if (action == ExtraAction.clearCompleted) {
                     Wire.send(ViewSignals.CLEAR_COMPLETED);
                   }
