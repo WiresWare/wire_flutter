@@ -39,7 +39,7 @@ class TodoController {
     print('Processor Ready');
   }
 
-  void _signalProcessor(DTO payload, int wid) {
+  void _signalProcessor(dynamic payload, int wid) {
     var wire = Wire.get(wid: wid).single;
     print('> TodoProcessor -> ${wire.signal}: data = ' + payload.toString());
     switch (wire.signal) {
