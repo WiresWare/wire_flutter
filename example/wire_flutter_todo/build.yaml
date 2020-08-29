@@ -6,10 +6,10 @@ targets:
         generate_for:
           - lib/main_web.dart
         options:
-          compiler: dartdevc
-          dartdevc_args:
+          compiler: dart2js
+          dart2js_args:
             - -o web/main.dart.js
-            # - --modules [es6]
+            - --modules [es6]
         release_options: # options
           compiler: dart2js
           # List any dart2js specific args here, or omit it.

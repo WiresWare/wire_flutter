@@ -9,6 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   universal_platform: ^0.1.3
+  js: 0.6.2
   wire:
   wire_flutter:
     path: ../..
