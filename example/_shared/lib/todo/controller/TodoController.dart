@@ -11,9 +11,8 @@ class TodoController {
   TodoModel todoModel;
   TodoController(this.todoModel) {
 
-
-//    Wire.add(this, ViewSignals.INPUT, (String data, int wid) {
-//      var text = data;
+//    Wire.add(this, ViewSignals.INPUT, (String payload, int wireId) {
+//      final text = payload;
 //      print('> TodoProcessor -> TodoViewOutputSignal.INPUT: ' + text);
 //      if (text != null && text.isNotEmpty) {
 //        todoModel.create(text);
@@ -21,12 +20,11 @@ class TodoController {
 //      }
 //    });
 //
-//    Wire.add(this, ViewSignals.DELETE, (String data, int wid) {
-//      var todoId = data;
+//    Wire.add(this, ViewSignals.DELETE, (String payload, int wireId) {
+//      final todoId = payload;
 //      print('> TodoProcessor -> TodoViewOutputSignal.DELETE: ' + todoId);
 //      todoModel.remove(todoId);
 //    });
-
 
     Wire.add(this, ViewSignals.INPUT,  _signalProcessor);
     Wire.add(this, ViewSignals.EDIT,   _signalProcessor);
@@ -39,8 +37,8 @@ class TodoController {
     print('Processor Ready');
   }
 
-  void _signalProcessor(dynamic payload, int wid) {
-    var wire = Wire.get(wid: wid).single;
+  void _signalProcessor(dynamic payload, int wireId) {
+    final wire = Wire.get(wireId: wireId).single;
     print('> TodoProcessor -> ${wire.signal}: data = ' + payload.toString());
     switch (wire.signal) {
       case ViewSignals.INPUT:
