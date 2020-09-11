@@ -1,3 +1,8 @@
+## 1.0.0
+- Stable release
+- Wire updated to 1.0.2
+- README updated
+
 ## 0.9.4 (wire release version 1.0.0)
 - Update to release version of Wire
 - WireDataBuilder with types <T>

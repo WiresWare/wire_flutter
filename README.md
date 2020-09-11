@@ -7,7 +7,7 @@ This widget subscribes to data changes and rebuild widget when change happened, 
 Update on data change:
 ```dart
 WireDataBuilder<int>(
-  param: CounterParams.COUNT,
+  dataKey: CounterDataKey.COUNT,
   builder: (context, value) => Text(
       '$value',
       style: Theme.of(context).textTheme.headline4,
@@ -25,9 +25,9 @@ FloatingActionButton(
 
 React on signal and update data (even passing function to data value). The new value or function call result will be propagated to the WireData listener, and build in WireDataBuilder will rebuild widget with already new value.
 ```dart
-Wire.add(this, CounterSignal.INCREASE, (signal, data) {
+Wire.add(this, CounterSignal.INCREASE, (payload, wireId) {
   Wire.data(CounterParams.COUNT, (value) {
-    return value + 1;
+    return (value ?? 0) + 1;
   });
 });
 ```
@@ -39,7 +39,7 @@ Wire.add(this, CounterSignal.INCREASE, (signal, data) {
 Create list from parameter `TodoDataParams.LIST` which is a list of TodoVO ids stored in Wire.data as separate objects
 ```dart
 WireDataBuilder<List<String>>(
-    param: TodoDataParams.LIST,
+    dataKey: TodoDataKeys.LIST,
     builder: (context, list) => ListView.builder(
       key: ArchSampleKeys.todoList,
       itemCount: list.length,
@@ -52,7 +52,7 @@ TodoItem consume this id (string) and retrieve/subscribe to WireData for changes
 ```dart
 Widget build(BuildContext context) {
     return WireDataBuilder<TodoVO>(
-      param: id,
+      dataKey: id,
       builder: (context, todoVO) => Visibility(
         visible: todoVO.visible, // render values from TodoVO
         child: ListTile(
@@ -88,11 +88,12 @@ View don't know where and who will process these signals, it only cares about re
 The signals can be processed anywhere, even in multiple places not related to each other - in this example it's one controller - TodoController
 You might think about TodoController as reducer from Redux which is listen for "events"-signals and set data. In this example controller is a brain of the application it has business-decision making logic and know how to process data and where to send it for further storage - TodoModel, hence it can store data by itself, but we prefer to decouple responsibility and controller just delegate data to model which knows how and where store data before update it in Wire.data.
 ```dart
- void _signalProcessor(Wire wire, dynamic data) {
+ void _signalProcessor(payload, wireId) {
+    final wire = Wire.get(wireId: wireId).single;
     print('> TodoProcessor -> ${wire.signal}: data = ' + data.toString());
     switch (wire.signal) {
       case TodoViewSignal.INPUT:
-        var createDTO = data as CreateDTO;
+        var createDTO = payload as CreateDTO;
         var text = createDTO.text;
         var note = createDTO.note;
         var completed = createDTO.completed;
@@ -102,7 +103,7 @@ You might think about TodoController as reducer from Redux which is listen for "
         }
         break;
       case TodoViewSignal.EDIT:
-        var editTodoDTO = data as EditDTO;
+        var editTodoDTO = payload as EditDTO;
         var todoText = editTodoDTO.text;
         var todoNote = editTodoDTO.note;
         var todoId = editTodoDTO.id;
