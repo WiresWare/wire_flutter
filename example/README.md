@@ -1,37 +1,4 @@
-# WireDataBuilder Widget - wire_flutter
-
-WireDataBuilder - data container layer for Flutter from [Wire toolkit](https://pub.dev/packages/wire).
-
-## How to use
-This widget subscribes to data changes and rebuild widget when change happened, when `Wire.data('param', value);`
-Update on data change:
-```dart
-WireDataBuilder<int>(
-  dataKey: CounterDataKey.COUNT,
-  builder: (context, value) => Text(
-      '$value',
-      style: Theme.of(context).textTheme.headline4,
-    )
-)
-```
-
-You can send messages/signals from UI which can be listened from anywhere else in the app, completely decoupled from the UI::
-```dart
-FloatingActionButton(
-  onPressed: () => Wire.send(CounterSignal.INCREASE),
-  child: Icon(Icons.add),
-)
-```
-
-React on signal and update data (even passing function to data value). The new value or function call result will be propagated to the WireData listener, and build in WireDataBuilder will rebuild widget with already new value.
-```dart
-Wire.add(this, CounterSignal.INCREASE, (payload, wireId) {
-  Wire.data(CounterParams.COUNT, (value) {
-    return (value ?? 0) + 1;
-  });
-});
-```
-
+# Examples
 ### TodoMVC Examle (based https://github.com/brianegan/flutter_architecture_samples)
 ![TodoMVC Flutter Architecture Samples](assets/wire_flutter_example_todo.gif)
 ![TodoMVC Web with shared code](https://github.com/wire-toolkit/wire_dart/raw/master/assets/wire_example_todo_web.gif)
