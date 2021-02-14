@@ -13,7 +13,7 @@ import 'package:wire_example_shared/todo/model/TodoModel.dart';
 import 'package:wire_example_shared/todo/controller/TodoController.dart';
 
 @JS('wire_data')
-external set _wire_data(void Function(String key, [dynamic value]) f);
+external set _wire_data(void Function(String key, { dynamic value }) f);
 @JS('wire_send')
 external set _wire_send(void Function(String signal, {dynamic payload, Object scope}) f);
 @JS('wire_add')
@@ -64,7 +64,6 @@ void main() {
 
   Wire.middleware(TodoMiddleware());
   TodoController(
-    TodoModel(
-      WebDatabaseService(),
-        isFlutter: false));
+    TodoModel(WebDatabaseService(), isFlutter: false)
+  );
 }

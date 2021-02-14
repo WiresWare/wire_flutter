@@ -12,7 +12,7 @@ var processor;
 
 void main() {
   processor = CounterProcessor();
-  Wire.data(CounterDataKey.COUNT, 0);
+  Wire.data(CounterDataKey.COUNT, value: 0);
   runApp(MyApp());
 }
 

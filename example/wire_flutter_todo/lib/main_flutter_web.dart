@@ -16,7 +16,7 @@ var todoController;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Wire.data(DataKeys.STATE, TodoApplicationState.LOADING);
+  Wire.data(DataKeys.STATE, value: TodoApplicationState.LOADING);
 
   IDatabaseService databaseService = WebDatabaseService();
 
@@ -25,5 +25,5 @@ Future<void> main() async {
 
   runApp(TodoAppFlutter());
 
-  Wire.data(DataKeys.STATE, TodoApplicationState.READY);
+  Wire.data(DataKeys.STATE, value: TodoApplicationState.READY);
 }
