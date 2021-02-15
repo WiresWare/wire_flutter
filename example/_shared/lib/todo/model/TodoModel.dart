@@ -19,7 +19,7 @@ class TodoModel {
         _dbService.retrieve(LOCAL_STORAGE_KEY).forEach((obj){
           if (obj != null) {
             var todoVO = TodoVO.fromJson(obj);
-            Wire.data<TodoVO>(todoVO.id, todoVO);
+            Wire.data<TodoVO>(todoVO.id, value: todoVO);
             idsList.add(todoVO.id);
             if (!todoVO.completed) notCompletedCount++;
           }
@@ -30,8 +30,8 @@ class TodoModel {
     }
     print('> TodoModel list: ${idsList.length}');
     print('> TodoModel count: ${notCompletedCount}');
-    Wire.data<List<String>>(DataKeys.LIST, idsList);
-    Wire.data<int>(DataKeys.COUNT, notCompletedCount);
+    Wire.data<List<String>>(DataKeys.LIST, value: idsList);
+    Wire.data<int>(DataKeys.COUNT, value: notCompletedCount);
   }
 
   TodoVO create(String text, String note, bool completed) {
@@ -43,9 +43,9 @@ class TodoModel {
     final count = Wire.data<int>(DataKeys.COUNT).value;
 
     todoList.add(todoVO.id);
-    Wire.data<TodoVO>(todoVO.id, todoVO);
-    Wire.data<List<String>>(DataKeys.LIST, todoList);
-    Wire.data<int>(DataKeys.COUNT, count + (completed ? 0 : 1));
+    Wire.data<TodoVO>(todoVO.id, value: todoVO);
+    Wire.data<List<String>>(DataKeys.LIST, value: todoList);
+    Wire.data<int>(DataKeys.COUNT, value: count + (completed ? 0 : 1));
 
     _save();
 
@@ -63,12 +63,12 @@ class TodoModel {
     todoWireData.remove();
 
     if (todoVO.completed == false) {
-      Wire.data(DataKeys.COUNT, count - 1);
+      Wire.data(DataKeys.COUNT, value: count - 1);
     }
 
     if (_isFlutter) {
       // Only difference with web version in Wire repositories (example TodoMVC)
-      Wire.data<List<String>>(DataKeys.LIST, todoList);
+      Wire.data<List<String>>(DataKeys.LIST, value: todoList);
     }
 
     _save();
@@ -97,8 +97,8 @@ class TodoModel {
 
     todoVO.completed = !todoVO.completed;
 
-    Wire.data(id, todoVO);
-    Wire.data(DataKeys.COUNT, count + (todoVO.completed ? -1 : 1));
+    Wire.data(id, value: todoVO);
+    Wire.data(DataKeys.COUNT, value: count + (todoVO.completed ? -1 : 1));
 
     _save();
 
@@ -119,10 +119,10 @@ class TodoModel {
       }
       if (todoVO.visible != todoVisible) {
         todoVO.visible = todoVisible;
-        Wire.data(id, todoVO);
+        Wire.data(id, value: todoVO);
       }
     });
-    Wire.data(DataKeys.FILTER, filter);
+    Wire.data(DataKeys.FILTER, value: filter);
     print('> TodoModel -> filtered: ' + filter.toString());
   }
 
@@ -136,10 +136,10 @@ class TodoModel {
       if (todoVO.completed != value) {
         count += value ? -1 : 1;
         todoVO.completed = value;
-        Wire.data(id, todoVO);
+        Wire.data(id, value: todoVO);
       }
     });
-    Wire.data(DataKeys.COUNT, count);
+    Wire.data(DataKeys.COUNT, value: count);
     _save();
   }
 
@@ -155,7 +155,7 @@ class TodoModel {
     });
 
     if (_isFlutter) {
-      Wire.data(DataKeys.LIST, todoList);
+      Wire.data(DataKeys.LIST, value: todoList);
     }
 
     _save();

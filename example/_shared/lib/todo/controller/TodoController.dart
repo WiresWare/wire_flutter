@@ -2,7 +2,6 @@ import 'package:wire/wire.dart';
 
 import '../const/FilterValues.dart';
 import '../const/ViewSignals.dart';
-import '../data/base/DTO.dart';
 import '../data/dto/InputDTO.dart';
 import '../model/TodoModel.dart';
 import '../data/dto/EditDTO.dart';
