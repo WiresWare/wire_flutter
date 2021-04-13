@@ -11,7 +11,8 @@ class WebDatabaseService extends IDatabaseService {
 
   @override
   dynamic retrieve(String key) {
-    return jsonDecode(window.localStorage[key]);
+    final value = window.localStorage[key];
+    return value != null ? jsonDecode(value) : null;
   }
 
   @override
@@ -20,7 +21,7 @@ class WebDatabaseService extends IDatabaseService {
   }
 
   @override
-  Future init([String key]) {
-    return null;
+  Future<bool> init([String? key]) {
+    return Future.value(true);
   }
 }

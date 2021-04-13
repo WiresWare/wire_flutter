@@ -9,7 +9,6 @@ import '../data/dto/EditDTO.dart';
 class TodoController {
   TodoModel todoModel;
   TodoController(this.todoModel) {
-
 //    Wire.add(this, ViewSignals.INPUT, (String payload, int wireId) {
 //      final text = payload;
 //      print('> TodoProcessor -> TodoViewOutputSignal.INPUT: ' + text);
@@ -25,8 +24,8 @@ class TodoController {
 //      todoModel.remove(todoId);
 //    });
 
-    Wire.add(this, ViewSignals.INPUT,  _signalProcessor);
-    Wire.add(this, ViewSignals.EDIT,   _signalProcessor);
+    Wire.add(this, ViewSignals.INPUT, _signalProcessor);
+    Wire.add(this, ViewSignals.EDIT, _signalProcessor);
     Wire.add(this, ViewSignals.DELETE, _signalProcessor);
     Wire.add(this, ViewSignals.TOGGLE, _signalProcessor);
     Wire.add(this, ViewSignals.FILTER, _signalProcessor);
@@ -38,16 +37,18 @@ class TodoController {
 
   void _signalProcessor(dynamic payload, int wireId) {
     final wire = Wire.get(wireId: wireId).single;
-    print('> TodoProcessor -> ${wire.signal}: data = ' + payload.toString());
+    print('> TodoProcessor -> ${wire!.signal}: data = ' + payload.toString());
     switch (wire.signal) {
       case ViewSignals.INPUT:
-        var createDTO = payload as InputDTO;
-        var text = createDTO.text;
-        var note = createDTO.note;
-        var completed = createDTO.completed;
-        if (text != null && text.isNotEmpty) {
+        var inputDTO = payload as InputDTO;
+        var text = inputDTO.text;
+        var note = inputDTO.note;
+        var completed = inputDTO.completed;
+        if (text.isNotEmpty) {
           todoModel.create(text, note, completed);
           Wire.send(ViewSignals.CLEAR_INPUT);
+        } else {
+          // Signalise about error or wrong input
         }
         break;
       case ViewSignals.EDIT:

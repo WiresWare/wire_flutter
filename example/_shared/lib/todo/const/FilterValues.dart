@@ -1,5 +1,1 @@
-enum FilterValues {
-  ALL,
-  ACTIVE,
-  COMPLETED
-}
+enum FilterValues { ALL, ACTIVE, COMPLETED }
