@@ -19,7 +19,6 @@ Future<void> main() async {
 
   TodoController(todoModel);
   RouteController();
-
   TodoAppWeb();
 
   document.querySelector('#loading').remove();

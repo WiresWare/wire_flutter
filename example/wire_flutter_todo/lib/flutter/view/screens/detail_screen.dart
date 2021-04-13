@@ -42,13 +42,15 @@ class DetailScreen extends StatelessWidget {
         child: WireDataBuilder<TodoVO>(
           dataKey: id,
           builder: (context, todoVO) => ListView(
-            children: [ Row( crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+            children: [
+              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Padding(
                   padding: EdgeInsets.only(right: 8.0),
-                  child: Checkbox( value: todoVO.completed,
+                  child: Checkbox(
+                    value: todoVO.completed,
                     key: ArchSampleKeys.detailsTodoItemCheckbox,
-                    onChanged: (value) => Wire.send(ViewSignals.TOGGLE, payload: id),
+                    onChanged: (value) =>
+                        Wire.send(ViewSignals.TOGGLE, payload: id),
                   ),
                 ),
                 Expanded(
@@ -56,13 +58,18 @@ class DetailScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 8.0, bottom: 16.0,),
-                        child: Text(todoVO.text,
+                        padding: EdgeInsets.only(
+                          top: 8.0,
+                          bottom: 16.0,
+                        ),
+                        child: Text(
+                          todoVO.text,
                           key: ArchSampleKeys.detailsTodoItemTask,
                           style: Theme.of(context).textTheme.headline,
                         ),
                       ),
-                      Text(todoVO.note,
+                      Text(
+                        todoVO.note,
                         key: ArchSampleKeys.detailsTodoItemNote,
                         style: Theme.of(context).textTheme.subhead,
                       )

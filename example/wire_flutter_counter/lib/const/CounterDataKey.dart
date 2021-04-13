@@ -1,5 +1,3 @@
 class CounterDataKey {
-  static const String
-    COUNT = "PARAMS_COUNT";
+  static const String COUNT = "PARAMS_COUNT";
 }
-

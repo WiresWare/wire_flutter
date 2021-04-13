@@ -35,67 +35,66 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Todo Wire App'),
-        actions: [
-          FilterButton(
-            isActive: activeTab == AppTab.todos,
-            activeFilter: FilterValues.ALL,
-            onSelected: (filter) => Wire.send(ViewSignals.FILTER, payload: filter),
-          ),
-          WireDataBuilder<int>(
-            dataKey: DataKeys.COUNT,
-            builder: (context, notCompletedCount) {
-              var allTodoCount = Wire.data(DataKeys.LIST).value.length;
-              var allCompleted = notCompletedCount == 0 && allTodoCount > 0;
-              var hasCompletedTodos = (allTodoCount - notCompletedCount) > 0;
-              return ExtraActionsButton(
-                allComplete: allCompleted,
-                hasCompletedTodos: hasCompletedTodos,
-                onSelected: (action) {
-                  print('> ExtraActionsButton -> action: $action');
-                  if (action == ExtraAction.toggleAllComplete) {
-                    Wire.send(ViewSignals.COMPLETE_ALL, payload: !allCompleted);
-                  } else if (action == ExtraAction.clearCompleted) {
-                    Wire.send(ViewSignals.CLEAR_COMPLETED);
-                  }
-                },
-            );},
-          )
-        ],
-      ),
-      body: activeTab == AppTab.todos
-          ? TodoList()
-          : StatsCounter(),
-
-      floatingActionButton: FloatingActionButton(
-        key: ArchSampleKeys.addTodoFab,
-        onPressed: () => Navigator.pushNamed(context, TodoRoutes.addTodo),
-        child: Icon(Icons.add),
-        tooltip: 'Add Todo',
-      ),
-      bottomNavigationBar: BottomNavigationWidget(activeTab)
-    );
+        appBar: AppBar(
+          title: Text('Todo Wire App'),
+          actions: [
+            FilterButton(
+              isActive: activeTab == AppTab.todos,
+              activeFilter: FilterValues.ALL,
+              onSelected: (filter) =>
+                  Wire.send(ViewSignals.FILTER, payload: filter),
+            ),
+            WireDataBuilder<int>(
+              dataKey: DataKeys.COUNT,
+              builder: (context, notCompletedCount) {
+                var allTodoCount = Wire.data(DataKeys.LIST_OF_IDS).value.length;
+                var allCompleted = notCompletedCount == 0 && allTodoCount > 0;
+                var hasCompletedTodos = (allTodoCount - notCompletedCount) > 0;
+                return ExtraActionsButton(
+                  allComplete: allCompleted,
+                  hasCompletedTodos: hasCompletedTodos,
+                  onSelected: (action) {
+                    print('> ExtraActionsButton -> action: $action');
+                    if (action == ExtraAction.toggleAllComplete) {
+                      Wire.send(ViewSignals.COMPLETE_ALL,
+                          payload: !allCompleted);
+                    } else if (action == ExtraAction.clearCompleted) {
+                      Wire.send(ViewSignals.CLEAR_COMPLETED);
+                    }
+                  },
+                );
+              },
+            )
+          ],
+        ),
+        body: activeTab == AppTab.todos ? TodoList() : StatsCounter(),
+        floatingActionButton: FloatingActionButton(
+          key: ArchSampleKeys.addTodoFab,
+          onPressed: () => Navigator.pushNamed(context, TodoRoutes.addTodo),
+          child: Icon(Icons.add),
+          tooltip: 'Add Todo',
+        ),
+        bottomNavigationBar: BottomNavigationWidget(activeTab));
   }
 
   Widget BottomNavigationWidget(activeTab) => BottomNavigationBar(
-    key: ArchSampleKeys.tabs,
-    currentIndex: AppTab.values.indexOf(activeTab),
-    onTap: (index) { _updateTab(AppTab.values[index]); },
-    items: AppTab.values.map((tab) {
-      return BottomNavigationBarItem(
-        icon: Icon(
-          tab == AppTab.todos ? Icons.list : Icons.show_chart,
-          key: tab == AppTab.stats
-            ? ArchSampleKeys.statsTab
-            : ArchSampleKeys.todoTab,
-        ),
-        title: Text(
-          tab == AppTab.stats
-            ? 'Stats'
-            : 'Todos',
-        ),
+        key: ArchSampleKeys.tabs,
+        currentIndex: AppTab.values.indexOf(activeTab),
+        onTap: (index) {
+          _updateTab(AppTab.values[index]);
+        },
+        items: AppTab.values.map((tab) {
+          return BottomNavigationBarItem(
+            icon: Icon(
+              tab == AppTab.todos ? Icons.list : Icons.show_chart,
+              key: tab == AppTab.stats
+                  ? ArchSampleKeys.statsTab
+                  : ArchSampleKeys.todoTab,
+            ),
+            title: Text(
+              tab == AppTab.stats ? 'Stats' : 'Todos',
+            ),
+          );
+        }).toList(),
       );
-    }).toList(),
-  );
 }

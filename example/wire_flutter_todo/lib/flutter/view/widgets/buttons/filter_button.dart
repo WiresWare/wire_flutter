@@ -62,9 +62,8 @@ class _Button extends StatelessWidget {
           value: FilterValues.ALL,
           child: Text(
             'Show All',
-            style: activeFilter == FilterValues.ALL
-                ? activeStyle
-                : defaultStyle,
+            style:
+                activeFilter == FilterValues.ALL ? activeStyle : defaultStyle,
           ),
         ),
         PopupMenuItem<FilterValues>(

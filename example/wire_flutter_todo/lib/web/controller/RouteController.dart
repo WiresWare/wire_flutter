@@ -12,12 +12,18 @@ class RouteController {
     checkFilterRouterChanged();
   }
 
-  void checkFilterRouterChanged () {
+  void checkFilterRouterChanged() {
     var filter;
     switch (window.location.hash) {
-      case '#/': filter = FilterValues.ALL; break;
-      case '#/active': filter = FilterValues.ACTIVE; break;
-      case '#/completed': filter = FilterValues.COMPLETED; break;
+      case '#/':
+        filter = FilterValues.ALL;
+        break;
+      case '#/active':
+        filter = FilterValues.ACTIVE;
+        break;
+      case '#/completed':
+        filter = FilterValues.COMPLETED;
+        break;
     }
     if (filter != null) Wire.send(ViewSignals.FILTER, payload: filter);
   }

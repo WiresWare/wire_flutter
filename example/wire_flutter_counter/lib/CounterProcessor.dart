@@ -14,7 +14,8 @@ class CounterProcessor {
 
     Wire.add(this, CounterSignal.DECREASE, (data, wid) {
       print('> Processor: DECREASE -> handle: ' + data.toString());
-      Wire.data(CounterDataKey.COUNT, value: (value) => value > 0 ? value - 1 : 0);
+      Wire.data(CounterDataKey.COUNT,
+          value: (value) => value > 0 ? value - 1 : 0);
     });
 
     print('Processor Ready');

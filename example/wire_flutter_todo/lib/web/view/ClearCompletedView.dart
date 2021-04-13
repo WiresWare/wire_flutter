@@ -7,12 +7,12 @@ import 'package:wire_example_shared/todo/const/ViewSignals.dart';
 import 'base/DomElementView.dart';
 
 class ClearCompletedView extends DomElement {
-  ClearCompletedView(ButtonElement dom):super(dom) {
-    var listWireData = Wire.data(DataKeys.LIST);
+  ClearCompletedView(ButtonElement dom) : super(dom) {
+    var listWireData = Wire.data(DataKeys.LIST_OF_IDS);
     var countWireData = Wire.data(DataKeys.COUNT);
 
     var updateComponentVisibility = (value) =>
-      setComponentVisibilityFrom(listWireData.value, countWireData.value);
+        setComponentVisibilityFrom(listWireData.value, countWireData.value);
 
     listWireData.subscribe(updateComponentVisibility);
     countWireData.subscribe(updateComponentVisibility);
@@ -22,8 +22,8 @@ class ClearCompletedView extends DomElement {
   }
 
   void setComponentVisibilityFrom(List list, int count) {
-    print('> ClearCompletedView -> setComponentVisibilityFrom: ${list.length} - ${count}');
+    print(
+        '> ClearCompletedView -> setComponentVisibilityFrom: ${list.length} - ${count}');
     dom.style.display = (count >= list?.length) ? 'none' : 'block';
   }
 }
-

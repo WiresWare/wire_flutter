@@ -8,35 +8,31 @@ import 'package:wire_example_shared/todo/data/vo/TodoVO.dart';
 import 'base/DomElementView.dart';
 
 class TodoListItemView extends DomElement {
-
   final inpToggle = InputElement()
     ..className = 'toggle'
     ..type = 'checkbox';
 
-  final lblContent = LabelElement()
-    ..className = 'todo-content';
+  final lblContent = LabelElement()..className = 'todo-content';
 
-  final btnDelete = ButtonElement()
-    ..className = 'destroy';
+  final btnDelete = ButtonElement()..className = 'destroy';
 
-  final inpEdit = InputElement()
-    ..className = 'edit';
+  final inpEdit = InputElement()..className = 'edit';
 
-  final container = DivElement()
-    ..className = 'view';
+  final container = DivElement()..className = 'view';
 
   final listeners = <StreamSubscription>[];
 
-  TodoListItemView(String id):super(LIElement()) {
-
+  TodoListItemView(String id) : super(LIElement()) {
     listeners.addAll([
-      inpToggle.onClick.listen((e) => Wire.send(ViewSignals.TOGGLE, payload: id)),
-      btnDelete.onClick.listen((e) => Wire.send(ViewSignals.DELETE, payload: id)),
+      inpToggle.onClick
+          .listen((e) => Wire.send(ViewSignals.TOGGLE, payload: id)),
+      btnDelete.onClick
+          .listen((e) => Wire.send(ViewSignals.DELETE, payload: id)),
       inpEdit.onKeyDown.listen((e) {
-        if (e.keyCode == KeyCode.ENTER) { Wire.send(ViewSignals.EDIT, payload: getEditData()); }
-        else if (e.keyCode == KeyCode.ESC) _OnEditCancel();
+        if (e.keyCode == KeyCode.ENTER) {
+          Wire.send(ViewSignals.EDIT, payload: getEditData());
+        } else if (e.keyCode == KeyCode.ESC) _OnEditCancel();
       }),
-
       lblContent.onDoubleClick.listen((_) => _OnEditBegin()),
       inpEdit.onBlur.listen((_) => _OnEditCancel())
     ]);
@@ -78,8 +74,8 @@ class TodoListItemView extends DomElement {
 
   EditDTO getEditData() => EditDTO(dom.id, inpEdit.value.trim(), '');
 
-  void _OnTodoDataChanged (dynamic todoVO) =>
-    todoVO != null ? update(todoVO as TodoVO) : remove();
+  void _OnTodoDataChanged(dynamic todoVO) =>
+      todoVO != null ? update(todoVO as TodoVO) : remove();
 
   void _OnEditBegin() {
     dom.classes.add('editing');
@@ -91,4 +87,3 @@ class TodoListItemView extends DomElement {
     dom.classes.remove('editing');
   }
 }
-

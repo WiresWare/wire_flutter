@@ -27,15 +27,14 @@ class ExtraActionsButton extends StatelessWidget {
         PopupMenuItem<ExtraAction>(
           key: ArchSampleKeys.toggleAll,
           value: ExtraAction.toggleAllComplete,
-          child: Text(allComplete
-              ? 'Incomplete All'
-              : 'Complete All'),
+          child: Text(allComplete ? 'Incomplete All' : 'Complete All'),
         ),
-        if (hasCompletedTodos) PopupMenuItem<ExtraAction>(
-          key: ArchSampleKeys.clearCompleted,
-          value: ExtraAction.clearCompleted,
-          child: Text('Clear Completed'),
-        ),
+        if (hasCompletedTodos)
+          PopupMenuItem<ExtraAction>(
+            key: ArchSampleKeys.clearCompleted,
+            value: ExtraAction.clearCompleted,
+            child: Text('Clear Completed'),
+          ),
       ],
     );
   }

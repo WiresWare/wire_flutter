@@ -9,7 +9,6 @@ import 'package:wire_example_shared/todo/data/vo/TodoVO.dart';
 import 'package:wire_flutter/wire_flutter.dart';
 
 class TodoItem extends StatelessWidget {
-
   final String id;
   final GestureTapCallback onTap;
   final ValueChanged<bool> onToggle;
@@ -28,25 +27,25 @@ class TodoItem extends StatelessWidget {
       builder: (context, todoVO) => Visibility(
         visible: todoVO.visible,
         child: ListTile(
-            onTap: onTap,
-            leading: Checkbox(
-              key: ArchSampleKeys.todoItemCheckbox(todoVO.id),
-              value: todoVO.completed,
-              onChanged: onToggle,
-            ),
-            title: Text(
-              todoVO.text,
-              key: ArchSampleKeys.todoItemTask(todoVO.id),
-              style: Theme.of(context).textTheme.title,
-            ),
-            subtitle: Text(
-              todoVO.note,
-              key: ArchSampleKeys.todoItemNote(todoVO.id),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.subhead,
-            ),
+          onTap: onTap,
+          leading: Checkbox(
+            key: ArchSampleKeys.todoItemCheckbox(todoVO.id),
+            value: todoVO.completed,
+            onChanged: onToggle,
           ),
+          title: Text(
+            todoVO.text,
+            key: ArchSampleKeys.todoItemTask(todoVO.id),
+            style: Theme.of(context).textTheme.title,
+          ),
+          subtitle: Text(
+            todoVO.note,
+            key: ArchSampleKeys.todoItemNote(todoVO.id),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.subhead,
+          ),
+        ),
       ),
     );
   }

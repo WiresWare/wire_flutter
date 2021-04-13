@@ -35,9 +35,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
     print('isEditing ${isEditing}');
     return Scaffold(
       appBar: AppBar(
-        title: Text(isEditing
-            ? "Edit Todo"
-            : "Add Todo"),
+        title: Text(isEditing ? "Edit Todo" : "Add Todo"),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -47,19 +45,19 @@ class _AddEditScreenState extends State<AddEditScreen> {
           onWillPop: () {
             return Future(() => true);
           },
-          child: !isEditing ? ListViewWidget(context, null) :
-          WireDataBuilder<TodoVO>( dataKey: widget.id,
-            builder: (ctx, todoVO) => ListViewWidget(ctx, todoVO),
-          ),
+          child: !isEditing
+              ? ListViewWidget(context, null)
+              : WireDataBuilder<TodoVO>(
+                  dataKey: widget.id,
+                  builder: (ctx, todoVO) => ListViewWidget(ctx, todoVO),
+                ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
           key: isEditing
               ? ArchSampleKeys.saveTodoFab
               : ArchSampleKeys.saveNewTodo,
-          tooltip: isEditing
-              ? 'Save Changes'
-              : 'Add Todo',
+          tooltip: isEditing ? 'Save Changes' : 'Add Todo',
           child: Icon(isEditing ? Icons.check : Icons.add),
           onPressed: () {
             final form = formKey.currentState;
@@ -67,7 +65,8 @@ class _AddEditScreenState extends State<AddEditScreen> {
               form.save();
 
               if (isEditing) {
-                Wire.send(ViewSignals.EDIT, payload: EditDTO(widget.id, _text, _note));
+                Wire.send(ViewSignals.EDIT,
+                    payload: EditDTO(widget.id, _text, _note));
               } else {
                 Wire.send(ViewSignals.INPUT, payload: InputDTO(_text, _note));
               }
@@ -79,28 +78,28 @@ class _AddEditScreenState extends State<AddEditScreen> {
   }
 
   Widget ListViewWidget(context, todoVO) => ListView(
-    children: [
-      TextFormField(
-        initialValue: todoVO?.text ?? '',
-        key: ArchSampleKeys.taskField,
-        autofocus: isEditing ? false : true,
-        style: Theme.of(context).textTheme.headline,
-        decoration: InputDecoration(hintText: 'New Todo'),
-        validator: (val) => val.trim().isEmpty
-          ? 'Empty Todo'
-          : null,
-        onSaved: (value) => _text = value,
-      ),
-      TextFormField(
-        initialValue: todoVO?.note ?? '',
-        key: ArchSampleKeys.noteField,
-        maxLines: 10,
-        style: Theme.of(context).textTheme.subhead,
-        decoration: InputDecoration(hintText: 'Notes',),
-        onSaved: (value) => _note = value,
-      )
-    ],
-  );
+        children: [
+          TextFormField(
+            initialValue: todoVO?.text ?? '',
+            key: ArchSampleKeys.taskField,
+            autofocus: isEditing ? false : true,
+            style: Theme.of(context).textTheme.headline,
+            decoration: InputDecoration(hintText: 'New Todo'),
+            validator: (val) => val.trim().isEmpty ? 'Empty Todo' : null,
+            onSaved: (value) => _text = value,
+          ),
+          TextFormField(
+            initialValue: todoVO?.note ?? '',
+            key: ArchSampleKeys.noteField,
+            maxLines: 10,
+            style: Theme.of(context).textTheme.subhead,
+            decoration: InputDecoration(
+              hintText: 'Notes',
+            ),
+            onSaved: (value) => _note = value,
+          )
+        ],
+      );
 
   bool get isEditing => widget.id != null;
 }

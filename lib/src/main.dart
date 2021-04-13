@@ -8,16 +8,14 @@ typedef WireDataWidgetBuilder<T> = Widget Function(
 
 /// WireDataBuilder
 class WireDataBuilder<T> extends StatefulWidget {
-  WireDataBuilder({
-    Key key,
-    @required this.dataKey,
-    @required this.builder,
-  })  : assert(dataKey != null),
-        assert(builder != null),
-        super(key: key);
-
-  final String dataKey;
+  final  String dataKey;
   final WireDataWidgetBuilder builder;
+
+  WireDataBuilder({
+    Key? key,
+    required this.dataKey,
+    required this.builder,
+  })  : super(key: key);
 
   @override
   _WireDataBuilderState<T> createState() => _WireDataBuilderState<T>();
@@ -29,7 +27,7 @@ class _WireDataBuilderState<T> extends State<WireDataBuilder> {
   @override
   void initState() {
     super.initState();
-    var wireData = Wire.data<T>(widget.dataKey);
+    final wireData = Wire.data<T>(widget.dataKey);
     this.value = wireData.value;
     wireData.subscribe(_onWireData);
   }
@@ -46,12 +44,12 @@ class _WireDataBuilderState<T> extends State<WireDataBuilder> {
 
   @override
   void dispose() {
-    if (widget != null) {
-      var wireData = Wire.data<T>(widget.dataKey);
-      if (!wireData.isSet && wireData.value == null)
-        wireData.remove();
-      else wireData?.unsubscribe(_onWireData);
-    }
+    var wireData = Wire.data<T>(widget.dataKey);
+    if (!wireData.isSet && wireData.value == null)
+      wireData.remove();
+    else
+      wireData.unsubscribe(_onWireData);
+
     value = null;
     super.dispose();
   }

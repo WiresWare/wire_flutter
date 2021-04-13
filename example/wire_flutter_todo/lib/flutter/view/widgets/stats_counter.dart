@@ -18,7 +18,7 @@ class StatsCounter extends StatelessWidget {
       child: WireDataBuilder<int>(
         dataKey: DataKeys.COUNT,
         builder: (context, notCompletedCount) {
-          var allTodoCount = Wire.data(DataKeys.LIST).value.length;
+          var allTodoCount = Wire.data(DataKeys.LIST_OF_IDS).value.length;
           var numCompleted = allTodoCount - notCompletedCount;
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +32,8 @@ class StatsCounter extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 24.0),
-                child: Text('$numCompleted',
+                child: Text(
+                  '$numCompleted',
                   key: ArchSampleKeys.statsNumCompleted,
                   style: Theme.of(context).textTheme.subhead,
                 ),
@@ -53,7 +54,8 @@ class StatsCounter extends StatelessWidget {
                 ),
               )
             ],
-        );},
+          );
+        },
       ),
     );
   }

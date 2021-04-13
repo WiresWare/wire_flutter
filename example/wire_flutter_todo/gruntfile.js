@@ -4,11 +4,28 @@ module.exports = function(grunt) {
 	require('load-grunt-tasks')(grunt);
 	require('time-grunt')(grunt);
 
+	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-exec');
 
 	// Project configuration.
 	grunt.initConfig({
+	  connect: {
+      server: {
+        options: {
+          port: 9001,
+          base: './web_native',
+          spawn: false,
+          open: {
+            target: "http://localhost:9001"
+          },
+          livereload: true,
+        }
+      }
+    },
 		watch: {
+		  options: {
+        livereload: true,
+      },
 			dart: {
 				files: ['**/*.dart'],
 				tasks: ['exec:rebuild_and_run_reload'],
@@ -18,27 +35,29 @@ module.exports = function(grunt) {
 				}
 			},
 			html: {
-				files: 'web/*.html',
+				files: 'web_native/*.html',
 				options: {
 					livereload: true
 				}
 			},
 			configGrunt: {
-				files: ['Gruntfile.js'],
+				files: ['gruntfile.js'],
 				options: {
 					reload: true
 				}
 			}
 		},
 		exec: {
-			copy_assets_for_web: '[[ -d web ]] && rm -rf web & mkdir web & cp -r assets/web ./',
-			rebuild_and_run_reload: 'sh ./build_web.sh && ((echo >/dev/tcp/localhost/8889) &>/dev/null && echo "TCP port 8889 open" || reload -p 8889 -b -d ./web &)'
+			remove_web_if_exists: 'if [ -e "./web_native" ]; then rm -rf "./web_native"; fi',
+			copy_assets_for_web: 'mkdir ./web_native & cp -r ./assets/web/* ./web_native',
+			rebuild_and_run_reload: 'sh ./scripts/build_native_web.sh'
 		}
 	});
 
 	// Default task(s).
 	grunt.registerTask('default', [
 		'exec',
+	  'connect',
 		'watch'
 	]);
 };

@@ -31,9 +31,19 @@ class ArchSampleKeys {
   static var activeFilter = UniqueKey();
   static var completedFilter = UniqueKey();
 
-  static todoItemCheckbox(id) { return Key(id); }
-  static todoItemTask(id) { return Key(id); }
-  static todoItemNote(id) { return Key(id); }
-  static todoItem(id) { return Key(id); }
+  static todoItemCheckbox(id) {
+    return Key(id);
+  }
 
+  static todoItemTask(id) {
+    return Key(id);
+  }
+
+  static todoItemNote(id) {
+    return Key(id);
+  }
+
+  static todoItem(id) {
+    return Key(id);
+  }
 }
