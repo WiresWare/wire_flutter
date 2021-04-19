@@ -21,5 +21,5 @@ Future<void> main() async {
   RouteController();
   TodoAppWeb();
 
-  document.querySelector('#loading').remove();
+  document.querySelector('#loading')?.remove();
 }

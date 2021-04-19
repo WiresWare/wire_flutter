@@ -72,7 +72,7 @@ class TodoListItemView extends DomElement {
     }
   }
 
-  EditDTO getEditData() => EditDTO(dom.id, inpEdit.value.trim(), '');
+  EditDTO getEditData() => EditDTO(dom.id, inpEdit.value!.trim(), '');
 
   void _OnTodoDataChanged(dynamic todoVO) =>
       todoVO != null ? update(todoVO as TodoVO) : remove();

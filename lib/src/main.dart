@@ -8,14 +8,14 @@ typedef WireDataWidgetBuilder<T> = Widget Function(
 
 /// WireDataBuilder
 class WireDataBuilder<T> extends StatefulWidget {
-  final  String dataKey;
+  final String dataKey;
   final WireDataWidgetBuilder builder;
 
   WireDataBuilder({
     Key? key,
     required this.dataKey,
     required this.builder,
-  })  : super(key: key);
+  }) : super(key: key);
 
   @override
   _WireDataBuilderState<T> createState() => _WireDataBuilderState<T>();

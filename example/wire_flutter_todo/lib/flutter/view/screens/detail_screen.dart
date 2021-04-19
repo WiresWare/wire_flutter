@@ -16,8 +16,8 @@ class DetailScreen extends StatelessWidget {
   final Function onDelete;
 
   DetailScreen({
-    @required this.id,
-    @required this.onDelete,
+    required this.id,
+    required this.onDelete,
   }) : super(key: ArchSampleKeys.todoDetailsScreen);
 
   @override

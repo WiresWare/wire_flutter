@@ -12,10 +12,10 @@ class ExtraActionsButton extends StatelessWidget {
   final bool hasCompletedTodos;
 
   ExtraActionsButton({
-    this.onSelected,
-    this.allComplete,
-    this.hasCompletedTodos,
-    Key key,
+    required this.onSelected,
+    required this.allComplete,
+    required this.hasCompletedTodos,
+    Key? key,
   }) : super(key: key);
 
   @override

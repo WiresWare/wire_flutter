@@ -11,21 +11,25 @@ class FilterButton extends StatelessWidget {
   final FilterValues activeFilter;
   final bool isActive;
 
-  FilterButton({this.onSelected, this.activeFilter, this.isActive, Key key})
+  FilterButton(
+      {required this.onSelected,
+      required this.activeFilter,
+      required this.isActive,
+      Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final defaultStyle = Theme.of(context).textTheme.body1;
+    final defaultStyle = Theme.of(context).textTheme.bodyText1;
     final activeStyle = Theme.of(context)
         .textTheme
-        .body1
+        .bodyText1!
         .copyWith(color: Theme.of(context).accentColor);
     final button = _Button(
       onSelected: onSelected,
       activeFilter: activeFilter,
       activeStyle: activeStyle,
-      defaultStyle: defaultStyle,
+      defaultStyle: defaultStyle!,
     );
 
     return AnimatedOpacity(
@@ -38,11 +42,11 @@ class FilterButton extends StatelessWidget {
 
 class _Button extends StatelessWidget {
   const _Button({
-    Key key,
-    @required this.onSelected,
-    @required this.activeFilter,
-    @required this.activeStyle,
-    @required this.defaultStyle,
+    Key? key,
+    required this.onSelected,
+    required this.activeFilter,
+    required this.activeStyle,
+    required this.defaultStyle,
   }) : super(key: key);
 
   final PopupMenuItemSelected<FilterValues> onSelected;

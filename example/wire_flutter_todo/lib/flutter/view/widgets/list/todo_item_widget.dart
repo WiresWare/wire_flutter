@@ -11,13 +11,13 @@ import 'package:wire_flutter/wire_flutter.dart';
 class TodoItem extends StatelessWidget {
   final String id;
   final GestureTapCallback onTap;
-  final ValueChanged<bool> onToggle;
+  final ValueChanged<bool?>? onToggle;
 
   TodoItem({
-    Key key,
-    @required this.id,
-    @required this.onTap,
-    @required this.onToggle,
+    Key? key,
+    required this.id,
+    required this.onTap,
+    required this.onToggle,
   }) : super(key: key);
 
   @override

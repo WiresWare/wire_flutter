@@ -12,7 +12,7 @@ class TodoAppWeb {
   TodoAppWeb() {
     final domNewTodoInput = document.querySelector('.new-todo');
     final domTodoList = document.querySelector('.todo-list');
-    final domTodoCount = document.querySelector('.todo-count').firstChild;
+    final domTodoCount = document.querySelector('.todo-count')!.firstChild;
     final domFiltersList = document.querySelector('.filters');
     final domToggleAll = document.querySelector('.toggle-all');
     final domClearCompleted = document.querySelector('.clear-completed');

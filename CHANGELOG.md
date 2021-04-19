@@ -1,3 +1,6 @@
+## 1.1.0
+- Wire lib updated to 1.2.0 with null-safety
+
 ## 1.0.0
 - Stable release
 - Wire updated to 1.0.2
