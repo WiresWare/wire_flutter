@@ -7,7 +7,11 @@ import 'base/DomElementView.dart';
 
 class CompleteAllView extends DomElement {
   CompleteAllView(CheckboxInputElement dom) : super(dom) {
-    dom.onChange.listen(
-        (e) => Wire.send(ViewSignals.COMPLETE_ALL, payload: dom.checked));
+    dom.onChange.listen(_onCompleteAllToggle);
+  }
+
+  void _onCompleteAllToggle(e) {
+    final isToggled = (this.dom as CheckboxInputElement).checked;
+    Wire.send(ViewSignals.COMPLETE_ALL, payload: isToggled);
   }
 }

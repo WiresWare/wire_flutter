@@ -7,9 +7,9 @@ import 'base/DomElementView.dart';
 
 class TodoCountView extends DomElement {
   TodoCountView(Element dom) : super(dom) {
-    var wireData = Wire.data(DataKeys.COUNT);
-    var update = (value) => dom.text = value.toString();
-    wireData.subscribe(update);
-    update(wireData.value);
+    final countWireData = Wire.data<int>(DataKeys.COUNT);
+    final update = (value) => dom.text = value.toString();
+    countWireData.subscribe(update);
+    update(countWireData.value);
   }
 }

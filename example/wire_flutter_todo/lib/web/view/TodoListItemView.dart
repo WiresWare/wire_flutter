@@ -13,33 +13,26 @@ class TodoListItemView extends DomElement {
     ..type = 'checkbox';
 
   final lblContent = LabelElement()..className = 'todo-content';
-
   final btnDelete = ButtonElement()..className = 'destroy';
-
   final inpEdit = InputElement()..className = 'edit';
-
   final container = DivElement()..className = 'view';
 
   final listeners = <StreamSubscription>[];
 
-  TodoListItemView(String id) : super(LIElement()) {
+  final id;
+
+  TodoListItemView(this.id) : super(LIElement()) {
     listeners.addAll([
-      inpToggle.onClick
-          .listen((e) => Wire.send(ViewSignals.TOGGLE, payload: id)),
-      btnDelete.onClick
-          .listen((e) => Wire.send(ViewSignals.DELETE, payload: id)),
-      inpEdit.onKeyDown.listen((e) {
-        if (e.keyCode == KeyCode.ENTER) {
-          Wire.send(ViewSignals.EDIT, payload: getEditData());
-        } else if (e.keyCode == KeyCode.ESC) _OnEditCancel();
-      }),
-      lblContent.onDoubleClick.listen((_) => _OnEditBegin()),
-      inpEdit.onBlur.listen((_) => _OnEditCancel())
+      inpToggle.onClick.listen(_onToggle),
+      btnDelete.onClick.listen(_onDelete),
+      inpEdit.onKeyDown.listen(_onEditKeyboardInput),
+      inpEdit.onBlur.listen((_) => _onEditCancel()),
+      lblContent.onDoubleClick.listen((_) => _onEditBegin()),
     ]);
 
     var todoWireData = Wire.data(id);
-    todoWireData.subscribe(_OnTodoDataChanged);
-    if (todoWireData.isSet) _OnTodoDataChanged(todoWireData.value);
+    todoWireData.subscribe(_onTodoDataChanged);
+    if (todoWireData.isSet) _onTodoDataChanged(todoWireData.value);
 
     container.append(inpToggle);
     container.append(lblContent);
@@ -50,8 +43,8 @@ class TodoListItemView extends DomElement {
   }
 
   void remove() {
-    Wire.data(dom.id).unsubscribe(_OnTodoDataChanged);
-    listeners.removeWhere((element) {
+    Wire.data(dom.id).unsubscribe(_onTodoDataChanged);
+    listeners.every((element) {
       element.cancel();
       return true;
     });
@@ -72,17 +65,36 @@ class TodoListItemView extends DomElement {
     }
   }
 
-  EditDTO getEditData() => EditDTO(dom.id, inpEdit.value!.trim(), '');
+  void _onEditKeyboardInput(e) {
+    switch(e.keyCode) {
+      case KeyCode.ENTER: {
+        final editDTO = EditDTO(dom.id, inpEdit.value!.trim(), '');
+        Wire.send(ViewSignals.EDIT, payload: editDTO);
+      } break;
+      case KeyCode.ESC: {
+        _onEditCancel();
+      } break;
+    }
+  }
 
-  void _OnTodoDataChanged(dynamic todoVO) =>
-      todoVO != null ? update(todoVO as TodoVO) : remove();
+  void _onDelete(e) {
+    Wire.send(ViewSignals.DELETE, payload: this.id);
+  }
 
-  void _OnEditBegin() {
+  void _onToggle(e) {
+    Wire.send(ViewSignals.TOGGLE, payload: this.id);
+  }
+
+  void _onTodoDataChanged(dynamic todoVO) {
+    todoVO != null ? update(todoVO as TodoVO) : remove();
+  }
+
+  void _onEditBegin() {
     dom.classes.add('editing');
     inpEdit.focus();
   }
 
-  void _OnEditCancel() {
+  void _onEditCancel() {
     inpEdit.text = lblContent.text;
     dom.classes.remove('editing');
   }
