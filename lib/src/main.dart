@@ -32,7 +32,7 @@ class _WireDataBuilderState<T> extends State<WireDataBuilder> {
     wireData.subscribe(_onWireData);
   }
 
-  void _onWireData(value) {
+  Future<void> _onWireData(value) async {
     if (value != null) this.value = value;
     setState(() {});
   }

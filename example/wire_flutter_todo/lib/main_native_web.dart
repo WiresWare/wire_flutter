@@ -15,7 +15,7 @@ var todoController;
 Future<void> main() async {
   Wire.middleware(TodoMiddleware());
 
-  var todoModel = TodoModel(WebDatabaseService(), isFlutter: false);
+  var todoModel = TodoModel(WebDatabaseService());
 
   TodoController(todoModel);
   RouteController();

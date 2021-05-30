@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  wire:
+  wire: ^1.4.0
   wire_flutter:
     path: ../../
 

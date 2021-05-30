@@ -1,3 +1,6 @@
+## 1.2.0
+- Wire lib updated to 1.4.0 with async and WireData getters
+
 ## 1.1.0
 - Wire lib updated to 1.2.0 with null-safety
 
