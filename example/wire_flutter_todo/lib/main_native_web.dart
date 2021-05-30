@@ -7,7 +7,7 @@ import 'package:wire_example_shared/todo/middleware/TodoMiddleware.dart';
 import 'package:wire_example_shared/todo/model/TodoModel.dart';
 import 'package:wire_example_shared/todo/service/WebDatabaseService.dart';
 import 'package:wire_example_shared/todo/controller/TodoController.dart';
-import 'web/controller/RouteController.dart';
+import 'package:wire_example_shared/todo/controller/RouteController.dart';
 
 var todoModel;
 var todoController;
