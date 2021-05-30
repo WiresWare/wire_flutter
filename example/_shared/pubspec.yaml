@@ -13,5 +13,5 @@ dev_dependencies:
 
 dependency_overrides:
 #  Only for development in main wire repo
-  wire:
-    path: ../..
+#  wire:
+#    path: ../..
