@@ -1,4 +1,5 @@
 import 'package:wire/wire.dart';
+import 'package:wire_example_shared/todo/const/DataKeys.dart';
 
 import '../const/FilterValues.dart';
 import '../const/ViewSignals.dart';
@@ -32,10 +33,19 @@ class TodoController {
     Wire.add(this, ViewSignals.CLEAR_COMPLETED, _signalProcessor);
     Wire.add(this, ViewSignals.COMPLETE_ALL, _signalProcessor);
 
+    Wire.data<int>(DataKeys.GET_COUNT_COMPLETED, getter: (WireData that) {
+      final listOfAllTodosWireData = Wire.data(DataKeys.LIST_OF_IDS);
+      final notCompletedCountWireData = Wire.data(DataKeys.COUNT);
+      final int notCompletedCount = notCompletedCountWireData.value;
+      listOfAllTodosWireData.subscribe(that.refresh);
+      notCompletedCountWireData.subscribe(that.refresh);
+      return (listOfAllTodosWireData.value as List).length - notCompletedCount;
+    });
+
     print('Processor Ready');
   }
 
-  void _signalProcessor(dynamic payload, int wireId) {
+  Future<void> _signalProcessor(dynamic payload, int wireId) async {
     final wire = Wire.get(wireId: wireId).single;
     print('> TodoProcessor -> ${wire!.signal}: data = ' + payload.toString());
     switch (wire.signal) {
