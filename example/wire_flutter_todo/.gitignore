@@ -30,6 +30,7 @@
 .gradle
 /build/
 web/
+local.properties
 
 # Android related
 **/android/**/gradle-wrapper.jar
