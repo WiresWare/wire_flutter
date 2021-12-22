@@ -56,8 +56,7 @@ class HomeScreenState extends State<HomeScreen> {
                   onSelected: (action) {
                     print('> ExtraActionsButton -> action: $action');
                     if (action == ExtraAction.toggleAllComplete) {
-                      Wire.send(ViewSignals.COMPLETE_ALL,
-                          payload: !allCompleted);
+                      Wire.send(ViewSignals.COMPLETE_ALL, payload: !allCompleted);
                     } else if (action == ExtraAction.clearCompleted) {
                       Wire.send(ViewSignals.CLEAR_COMPLETED);
                     }
@@ -91,9 +90,7 @@ class HomeScreenState extends State<HomeScreen> {
                   ? ArchSampleKeys.statsTab
                   : ArchSampleKeys.todoTab,
             ),
-            title: Text(
-              tab == AppTab.stats ? 'Stats' : 'Todos',
-            ),
+            label: tab == AppTab.stats ? 'Stats' : 'Todos',
           );
         }).toList(),
       );

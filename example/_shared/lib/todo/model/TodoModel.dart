@@ -171,7 +171,7 @@ class TodoModel {
   void _checkOnCompleteAll() {
     final completeAllWireData = Wire.data<bool>(DataKeys.COMPLETE_ALL);
     final completeAll = completeAllWireData.isSet ? completeAllWireData.value : false;
-    if (completeAll) {
+    if (completeAll > 0) {
       Wire.data(DataKeys.COMPLETE_ALL, value: false);
       Wire.send(ViewSignals.COMPLETE_ALL_FORCED, payload: false);
     }

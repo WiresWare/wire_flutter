@@ -36,14 +36,14 @@ class TodoItem extends StatelessWidget {
           title: Text(
             todoVO.text,
             key: ArchSampleKeys.todoItemTask(todoVO.id),
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.headline6,
           ),
           subtitle: Text(
             todoVO.note,
             key: ArchSampleKeys.todoItemNote(todoVO.id),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.subhead,
+            style: Theme.of(context).textTheme.subtitle1,
           ),
         ),
       ),

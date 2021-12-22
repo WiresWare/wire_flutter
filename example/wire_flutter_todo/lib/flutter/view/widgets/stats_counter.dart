@@ -27,7 +27,7 @@ class StatsCounter extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 8.0),
                 child: Text(
                   'Completed Todos',
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
               ),
               Padding(
@@ -35,14 +35,14 @@ class StatsCounter extends StatelessWidget {
                 child: Text(
                   '$numCompleted',
                   key: ArchSampleKeys.statsNumCompleted,
-                  style: Theme.of(context).textTheme.subhead,
+                  style: Theme.of(context).textTheme.headline2,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 8.0),
                 child: Text(
                   'Active Todos',
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
               Padding(
@@ -50,7 +50,7 @@ class StatsCounter extends StatelessWidget {
                 child: Text(
                   '$notCompletedCount',
                   key: ArchSampleKeys.statsNumActive,
-                  style: Theme.of(context).textTheme.subhead,
+                  style: Theme.of(context).textTheme.headline2,
                 ),
               )
             ],

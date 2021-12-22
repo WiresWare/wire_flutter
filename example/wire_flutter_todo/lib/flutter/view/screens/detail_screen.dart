@@ -65,13 +65,13 @@ class DetailScreen extends StatelessWidget {
                         child: Text(
                           todoVO.text,
                           key: ArchSampleKeys.detailsTodoItemTask,
-                          style: Theme.of(context).textTheme.headline,
+                          style: Theme.of(context).textTheme.headline1,
                         ),
                       ),
                       Text(
                         todoVO.note,
                         key: ArchSampleKeys.detailsTodoItemNote,
-                        style: Theme.of(context).textTheme.subhead,
+                        style: Theme.of(context).textTheme.headline2,
                       )
                     ],
                   ),

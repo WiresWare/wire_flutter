@@ -40,24 +40,20 @@ class TodoList extends StatelessWidget {
                         _removeTodo(context, todoId);
                       },
                       child: TodoItem(
-                          id: todoId,
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) {
-                                  return DetailScreen(
-                                    id: todoId,
-                                    onDelete: () =>
-                                        {_removeTodo(context, todoId)},
-                                  );
-                                },
+                        id: todoId,
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => DetailScreen(id: todoId,
+                                onDelete: () => { _removeTodo(context, todoId) },
                               ),
-                            );
-                          },
-                          onToggle: (value) {
-                            print('> TodoItem click $todoId');
-                            Wire.send(ViewSignals.TOGGLE, payload: todoId);
-                          }),
+                            ),
+                          );
+                        },
+                        onToggle: (value) {
+                          print('> TodoItem click $todoId');
+                          Wire.send(ViewSignals.TOGGLE, payload: todoId);
+                        }),
                     );
                   },
                 ),

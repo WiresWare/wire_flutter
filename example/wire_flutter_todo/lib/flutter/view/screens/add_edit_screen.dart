@@ -41,7 +41,6 @@ class _AddEditScreenState extends State<AddEditScreen> {
         padding: EdgeInsets.all(16.0),
         child: Form(
           key: formKey,
-          autovalidate: false,
           onWillPop: () {
             return Future(() => true);
           },
@@ -83,7 +82,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
             initialValue: todoVO?.text ?? '',
             key: ArchSampleKeys.taskField,
             autofocus: isEditing ? false : true,
-            style: Theme.of(context).textTheme.headline,
+            style: Theme.of(context).textTheme.headline1,
             decoration: InputDecoration(hintText: 'New Todo'),
             validator: (val) => val!.trim().isEmpty ? 'Empty Todo' : null,
             onSaved: (value) => _text = value!,
@@ -92,7 +91,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
             initialValue: todoVO?.note ?? '',
             key: ArchSampleKeys.noteField,
             maxLines: 10,
-            style: Theme.of(context).textTheme.subhead,
+            style: Theme.of(context).textTheme.headline2,
             decoration: InputDecoration(
               hintText: 'Notes',
             ),

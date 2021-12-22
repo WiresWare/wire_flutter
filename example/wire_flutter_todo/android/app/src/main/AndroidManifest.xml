@@ -6,7 +6,7 @@
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
     <application
-        android:name="io.flutter.app.FlutterApplication"
+        android:name="${applicationName}"
         android:label="wire_flutter_todo"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -20,6 +20,15 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+<!--            <meta-data-->
+<!--                android:name="io.flutter.embedding.android.SplashScreenDrawable"-->
+<!--                android:resource="@drawable/launch_background"-->
+<!--            />-->
+<!--            &lt;!&ndash; Theme to apply as soon as Flutter begins rendering frames &ndash;&gt;-->
+<!--            <meta-data-->
+<!--                android:name="io.flutter.embedding.android.NormalTheme"-->
+<!--                android:resource="@style/NormalTheme"-->
+<!--            />-->
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
