@@ -31,6 +31,8 @@
 /build/
 /web/
 /web_native/
+/node_modules/
+/examples/wire_flutter_todo/node_modules/
 local.properties
 
 # Android related
@@ -75,4 +77,3 @@ local.properties
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
-/node_modules/
