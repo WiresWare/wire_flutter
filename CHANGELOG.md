@@ -1,3 +1,9 @@
+## 1.2.1
+- Wire lib updated to 1.4.2
+- Mobile Todo example update with use of Hive database inside _shared code
+- All examples updated to use async TodoModel constructor
+- Working version of all 3 examples
+
 ## 1.2.0
 - Wire lib updated to 1.4.0 with async and WireData getters
 

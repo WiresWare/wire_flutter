@@ -10,7 +10,7 @@ dependencies:
     sdk: flutter
   universal_platform: ^1.0.0+1
   js: ^0.6.3
-  wire: ^1.4.0
+  wire: ^1.4.2
   wire_flutter:
     path: ../..
   wire_example_shared:
