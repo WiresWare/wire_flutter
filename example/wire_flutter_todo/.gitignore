@@ -29,7 +29,8 @@
 .pub/
 .gradle
 /build/
-web/
+/web/
+/web_native/
 local.properties
 
 # Android related
