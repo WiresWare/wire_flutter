@@ -6,7 +6,9 @@ import 'IDatabaseService.dart';
 class WebDatabaseService extends IDatabaseService {
   @override
   bool exist(String key) {
-    return window.localStorage.containsKey(key);
+    final result = !!window.localStorage.containsKey(key);
+    print('> WebDatabaseService -> exist: $key = $result');
+    return result;
   }
 
   @override
