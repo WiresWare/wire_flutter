@@ -1,6 +1,6 @@
 name: wire_example_shared
 description: examples of shared code using git-subrepo
-version: 0.0.2
+version: 0.0.3
 # publish_to: none
 
 environment:
@@ -8,6 +8,8 @@ environment:
 
 dependencies:
   wire: ^1.4.0
+  hive: ^2.0.5
+  path_provider:
 
 dev_dependencies:
 
