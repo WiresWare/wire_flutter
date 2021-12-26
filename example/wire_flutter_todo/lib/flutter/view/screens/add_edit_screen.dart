@@ -5,13 +5,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:wire_flutter/wire_flutter.dart';
-import 'package:wire_example_shared/todo/data/vo/TodoVO.dart';
+import 'package:wire/wire.dart';
+import 'package:wire_example_shared/todo/const/ViewSignals.dart';
 import 'package:wire_example_shared/todo/data/dto/EditDTO.dart';
 import 'package:wire_example_shared/todo/data/dto/InputDTO.dart';
-import 'package:wire_example_shared/todo/const/ViewSignals.dart';
+import 'package:wire_example_shared/todo/data/vo/TodoVO.dart';
+import 'package:wire_flutter/wire_flutter.dart';
 import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
-import 'package:wire/wire.dart';
 
 class AddEditScreen extends StatefulWidget {
   final String? id;
@@ -53,9 +53,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          key: isEditing
-              ? ArchSampleKeys.saveTodoFab
-              : ArchSampleKeys.saveNewTodo,
+          key: isEditing ? ArchSampleKeys.saveTodoFab : ArchSampleKeys.saveNewTodo,
           tooltip: isEditing ? 'Save Changes' : 'Add Todo',
           child: Icon(isEditing ? Icons.check : Icons.add),
           onPressed: () {
@@ -64,8 +62,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
               form.save();
 
               if (isEditing) {
-                Wire.send(ViewSignals.EDIT,
-                    payload: EditDTO(widget.id!, _text, _note));
+                Wire.send(ViewSignals.EDIT, payload: EditDTO(widget.id!, _text, _note));
               } else {
                 Wire.send(ViewSignals.INPUT, payload: InputDTO(_text, _note));
               }
@@ -82,7 +79,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
             initialValue: todoVO?.text ?? '',
             key: ArchSampleKeys.taskField,
             autofocus: isEditing ? false : true,
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.headline6,
             decoration: InputDecoration(hintText: 'New Todo'),
             validator: (val) => val!.trim().isEmpty ? 'Empty Todo' : null,
             onSaved: (value) => _text = value!,
@@ -91,7 +88,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
             initialValue: todoVO?.note ?? '',
             key: ArchSampleKeys.noteField,
             maxLines: 10,
-            style: Theme.of(context).textTheme.headline2,
+            style: Theme.of(context).textTheme.subtitle1,
             decoration: InputDecoration(
               hintText: 'Notes',
             ),
