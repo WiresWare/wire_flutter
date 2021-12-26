@@ -12,16 +12,17 @@ class TodoModel {
 
   final IDatabaseService _dbService;
 
-  late Future<bool> isReady;
+  late Future<bool> whenReady;
 
   TodoModel(this._dbService) {
-    isReady = new Future(() async {
+    whenReady = new Future(() async {
       var idsList = <String>[];
       var notCompletedCount = 0;
+      print('> TodoModel -> init: _dbService.exist = ${_dbService.exist(STORAGE_KEY)}');
       if (_dbService.exist(STORAGE_KEY)) {
-        print('> TodoModel -> init: _dbService.exist = ${_dbService.exist(STORAGE_KEY)}');
         try {
           (await _dbService.retrieve(STORAGE_KEY) as List).forEach((obj) {
+            print('> TodoModel -> init: todo = $obj');
             if (obj != null) {
               var todoVO = TodoVO.fromJson(obj);
               Wire.data<TodoVO>(todoVO.id, value: todoVO);
@@ -196,8 +197,9 @@ class TodoModel {
   }
 
   void _saveChanges() {
-    var listOfTodoVO = <TodoVO>[];
-    (Wire.data(DataKeys.LIST_OF_IDS).value as List).forEach((id) => listOfTodoVO.add(Wire.data(id).value));
+    var listOfTodoVO = [];
+    (Wire.data(DataKeys.LIST_OF_IDS).value as List).forEach((id) =>
+        listOfTodoVO.add(Wire.data(id).value.toJson()));
     _dbService.save(STORAGE_KEY, listOfTodoVO);
     _dbService.save(STORAGE_KEY_COMPLETE_ALL, Wire.data(DataKeys.COMPLETE_ALL).value as bool);
   }
