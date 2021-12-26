@@ -49,7 +49,7 @@ module.exports = function(grunt) {
 		},
 		exec: {
 			remove_web_if_exists: 'if [ -e "./web_native" ]; then rm -rf "./web_native"; fi',
-			copy_assets_for_web: 'mkdir ./web_native & cp -r ./assets/web/* ./web_native',
+			copy_assets_for_web: 'mkdir ./web_native & cp -r ./assets/web_native/* ./web_native',
 			rebuild_and_run_reload: 'sh ./scripts/build_native_web.sh'
 		}
 	});
