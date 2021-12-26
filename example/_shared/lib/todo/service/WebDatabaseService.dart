@@ -1,5 +1,5 @@
-import 'dart:html';
 import 'dart:convert';
+import 'dart:html';
 
 import 'IDatabaseService.dart';
 
@@ -10,9 +10,9 @@ class WebDatabaseService extends IDatabaseService {
   }
 
   @override
-  dynamic retrieve(String key) {
+  Future<dynamic> retrieve(String key) {
     final value = window.localStorage[key];
-    return value != null ? jsonDecode(value) : null;
+    return Future.value(value != null ? jsonDecode(value) : null);
   }
 
   @override
