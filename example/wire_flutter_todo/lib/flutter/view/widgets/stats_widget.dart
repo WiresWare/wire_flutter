@@ -5,12 +5,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wire/wire.dart';
-import 'package:wire_flutter/wire_flutter.dart';
 import 'package:wire_example_shared/todo/const/DataKeys.dart';
+import 'package:wire_flutter/wire_flutter.dart';
 import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
 
-class StatsCounter extends StatelessWidget {
-  StatsCounter() : super(key: ArchSampleKeys.statsCounter);
+class Stats extends StatelessWidget {
+  Stats() : super(key: ArchSampleKeys.statsCounter);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class StatsCounter extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 8.0),
                 child: Text(
                   'Completed Todos',
-                  style: Theme.of(context).textTheme.headline1,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
               ),
               Padding(
@@ -42,7 +42,7 @@ class StatsCounter extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 8.0),
                 child: Text(
                   'Active Todos',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
               ),
               Padding(

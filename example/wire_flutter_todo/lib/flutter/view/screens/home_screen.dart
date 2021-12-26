@@ -4,18 +4,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:wire/wire.dart';
-import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
-import 'package:wire_flutter/wire_flutter.dart';
-import 'package:wire_flutter_todo/flutter/const/Routes.dart';
-import 'package:wire_flutter_todo/flutter/enum/AppTab.dart';
-import 'package:wire_flutter_todo/flutter/enum/ExtraAction.dart';
 import 'package:wire_example_shared/todo/const/DataKeys.dart';
 import 'package:wire_example_shared/todo/const/FilterValues.dart';
 import 'package:wire_example_shared/todo/const/ViewSignals.dart';
+import 'package:wire_flutter/wire_flutter.dart';
+import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
+import 'package:wire_flutter_todo/flutter/const/Routes.dart';
+import 'package:wire_flutter_todo/flutter/enum/AppTab.dart';
+import 'package:wire_flutter_todo/flutter/enum/ExtraAction.dart';
 import 'package:wire_flutter_todo/flutter/view/widgets/buttons/extra_actions_button.dart';
 import 'package:wire_flutter_todo/flutter/view/widgets/buttons/filter_button.dart';
-import 'package:wire_flutter_todo/flutter/view/widgets/stats_counter.dart';
 import 'package:wire_flutter_todo/flutter/view/widgets/list/todo_list_widget.dart';
+import 'package:wire_flutter_todo/flutter/view/widgets/stats_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen() : super(key: ArchSampleKeys.homeScreen);
@@ -41,8 +41,7 @@ class HomeScreenState extends State<HomeScreen> {
             FilterButton(
               isActive: activeTab == AppTab.todos,
               activeFilter: FilterValues.ALL,
-              onSelected: (filter) =>
-                  Wire.send(ViewSignals.FILTER, payload: filter),
+              onSelected: (filter) => Wire.send(ViewSignals.FILTER, payload: filter),
             ),
             WireDataBuilder<int>(
               dataKey: DataKeys.COUNT,
@@ -66,7 +65,7 @@ class HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
-        body: activeTab == AppTab.todos ? TodoList() : StatsCounter(),
+        body: activeTab == AppTab.todos ? TodoList() : Stats(),
         floatingActionButton: FloatingActionButton(
           key: ArchSampleKeys.addTodoFab,
           onPressed: () => Navigator.pushNamed(context, TodoRoutes.addTodo),
@@ -86,9 +85,7 @@ class HomeScreenState extends State<HomeScreen> {
           return BottomNavigationBarItem(
             icon: Icon(
               tab == AppTab.todos ? Icons.list : Icons.show_chart,
-              key: tab == AppTab.stats
-                  ? ArchSampleKeys.statsTab
-                  : ArchSampleKeys.todoTab,
+              key: tab == AppTab.stats ? ArchSampleKeys.statsTab : ArchSampleKeys.todoTab,
             ),
             label: tab == AppTab.stats ? 'Stats' : 'Todos',
           );
