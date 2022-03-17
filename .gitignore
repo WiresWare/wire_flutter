@@ -8,7 +8,11 @@
 .buildlog/
 .history
 .svn/
+example/_shared/pubspec.lock
+example/wire_flutter_counter/pubspec.lock
+example/wire_flutter_todo/pubspec.lock
 pubspec.lock
+
 
 # IntelliJ related
 *.iml
