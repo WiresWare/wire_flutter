@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:wire/wire.dart';
 import 'package:wire_flutter/wire_flutter.dart';
@@ -8,10 +6,8 @@ import 'CounterProcessor.dart';
 import 'const/CounterSignals.dart';
 import 'const/CounterDataKey.dart';
 
-var processor;
-
 void main() {
-  processor = CounterProcessor();
+  CounterProcessor();
   Wire.data(CounterDataKey.COUNT, value: 0);
   runApp(MyApp());
 }

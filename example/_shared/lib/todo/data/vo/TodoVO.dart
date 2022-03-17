@@ -5,6 +5,7 @@ class TodoVO {
   String id;
 
   bool visible = true;
+  bool isDeletable = true;
 
   TodoVO(this.id, this.text, this.note, this.completed);
 

@@ -26,16 +26,16 @@ class TodoListItemView extends DomElement {
       inpEdit.onKeyDown.listen((e) {
         if (e.keyCode == KeyCode.ENTER) {
           Wire.send(ViewSignals.EDIT, payload: getEditData());
-        } else if (e.keyCode == KeyCode.ESC) _OnEditCancel();
+        } else if (e.keyCode == KeyCode.ESC) _handleOnEditCancel();
       }),
-      lblContent.onDoubleClick.listen((_) => _OnEditBegin()),
-      inpEdit.onBlur.listen((_) => _OnEditCancel())
+      lblContent.onDoubleClick.listen((_) => _handleOnEditBegin()),
+      inpEdit.onBlur.listen((_) => _handleOnEditCancel())
     ]);
 
     var todoWireData = Wire.data(id);
-    todoWireData.subscribe(_OnDataChanged);
+    todoWireData.subscribe(_handleOnDataChanged);
     if (todoWireData.isSet) {
-      _OnDataChanged(todoWireData.value);
+      _handleOnDataChanged(todoWireData.value);
     }
 
     container.append(inpToggle);
@@ -48,9 +48,9 @@ class TodoListItemView extends DomElement {
 
   void remove() {
     final todoWireData = Wire.data(dom.id);
-    final hasListener = todoWireData.hasListener(_OnDataChanged);
-    print('> TodoListItemView -> remove: hasListener = ${hasListener}');
-    if (hasListener) todoWireData.unsubscribe(_OnDataChanged);
+    final hasListener = todoWireData.hasListener(_handleOnDataChanged);
+    print('> TodoListItemView -> remove: hasListener = $hasListener');
+    if (hasListener) todoWireData.unsubscribe(_handleOnDataChanged);
     listeners.removeWhere((element) { element.cancel(); return true; });
     container.remove();
     inpEdit.remove();
@@ -73,17 +73,17 @@ class TodoListItemView extends DomElement {
 
   EditDTO getEditData() => EditDTO(dom.id, inpEdit.value!.trim(), '');
 
-  Future<void> _OnDataChanged(todoVO) async {
-    print('> TodoListItemView -> _OnTodoDataChanged = ${todoVO}');
+  Future<void> _handleOnDataChanged(todoVO) async {
+    print('> TodoListItemView -> _OnTodoDataChanged = $todoVO');
     todoVO != null ? update(todoVO as TodoVO) : remove();
   }
 
-  void _OnEditBegin() {
+  void _handleOnEditBegin() {
     dom.classes.add('editing');
     inpEdit.focus();
   }
 
-  void _OnEditCancel() {
+  void _handleOnEditCancel() {
     inpEdit.text = lblContent.text;
     dom.classes.remove('editing');
   }

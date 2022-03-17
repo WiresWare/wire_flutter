@@ -13,13 +13,13 @@ class TodoFilterView extends DomElement {
     FilterValues.COMPLETED: 2
   };
 
-  final CLASS_NAME_SELECTED = 'selected';
+  static const CLASS_NAME_SELECTED = 'selected';
 
   TodoFilterView(UListElement dom) : super(dom) {
     Wire.data<FilterValues>(DataKeys.FILTER).subscribe((value) async {
       final filter = value as FilterValues;
       final selectedChildIndex = _FILTER_TO_VALUE[filter];
-      print('> TodoFilterView -> DataKeys.FILTER subscribe: ${value} - ${selectedChildIndex}');
+      print('> TodoFilterView -> DataKeys.FILTER subscribe: $value - $selectedChildIndex');
       (dom.querySelector('.$CLASS_NAME_SELECTED') as HtmlElement).className = '';
       (dom.children[selectedChildIndex].children[0] as HtmlElement).className = CLASS_NAME_SELECTED;
     });

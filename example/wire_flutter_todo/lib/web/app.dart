@@ -1,3 +1,4 @@
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 
 import 'package:wire_example_shared/todo/view/web/ClearCompletedView.dart';

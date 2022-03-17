@@ -1,3 +1,7 @@
+## 1.2.2
+- Fix of "setstate() called after dispose()"
+- Todo example with use of WireDataLockToken
+
 ## 1.2.1
 - Wire lib updated to 1.4.2
 - Mobile Todo example update with use of Hive database inside _shared code

@@ -67,7 +67,7 @@ class TodoList extends StatelessWidget {
     TodoVO todoVO = todoWireData.value;
     Wire.send(ViewSignals.DELETE, payload: todoId);
 
-    Scaffold.of(context).showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         key: ArchSampleKeys.snackbar,
         duration: Duration(seconds: 3),

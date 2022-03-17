@@ -14,6 +14,8 @@ class TodoModel {
 
   late Future<bool> whenReady;
 
+  final todoItemLockToken = WireDataLockToken();
+
   TodoModel(this._dbService) {
     whenReady = new Future(() async {
       var idsList = <String>[];
@@ -25,7 +27,8 @@ class TodoModel {
             print('> TodoModel -> init: todo = $obj');
             if (obj != null) {
               var todoVO = TodoVO.fromJson(obj);
-              Wire.data<TodoVO>(todoVO.id, value: todoVO);
+              todoVO.isDeletable = true;
+              // Wire.data<TodoVO>(todoVO.id, value: todoVO).lock(todoItemLockToken);
               idsList.add(todoVO.id);
               if (!todoVO.completed) notCompletedCount++;
             }
@@ -36,7 +39,7 @@ class TodoModel {
         }
       }
       print('> TodoModel -> init: list = ${idsList.length}');
-      print('> TodoModel -> init: count = ${notCompletedCount}');
+      print('> TodoModel -> init: count = $notCompletedCount');
       final isCompleteAll = await _dbService.retrieve(STORAGE_KEY_COMPLETE_ALL) ?? notCompletedCount == 0;
 
       Wire.data<List<String>>(DataKeys.LIST_OF_IDS, value: idsList);
@@ -72,6 +75,7 @@ class TodoModel {
     final todoVO = wireDataTodoVO.value;
 
     todoIdsList.remove(id);
+    // wireDataTodoVO.unlock(todoItemLockToken);
     await wireDataTodoVO.remove();
 
     if (todoVO.completed == false) {
@@ -109,7 +113,9 @@ class TodoModel {
 
     todoVO.completed = !todoVO.completed;
 
+    Wire.data(id).unlock(todoItemLockToken);
     Wire.data(id, value: todoVO);
+    Wire.data(id).lock(todoItemLockToken);
     Wire.data(DataKeys.COUNT, value: count + (todoVO.completed ? -1 : 1));
 
     if (wasCompleted) _checkOnCompleteAll();

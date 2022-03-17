@@ -24,7 +24,7 @@ class FilterButton extends StatelessWidget {
     final activeStyle = Theme.of(context)
         .textTheme
         .bodyText1!
-        .copyWith(color: Theme.of(context).accentColor);
+        .copyWith(color: Theme.of(context).primaryColor);
     final button = _Button(
       onSelected: onSelected,
       activeFilter: activeFilter,

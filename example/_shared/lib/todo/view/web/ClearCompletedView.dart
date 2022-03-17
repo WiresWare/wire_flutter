@@ -26,7 +26,7 @@ class ClearCompletedView extends DomElement {
 
   void setComponentVisibilityFrom(List list, int count) {
     print(
-        '> ClearCompletedView -> setComponentVisibilityFrom: ${list.length} - ${count}');
+        '> ClearCompletedView -> setComponentVisibilityFrom: ${list.length} - $count');
     dom.style.display = (count >= list.length) ? 'none' : 'block';
   }
 }

@@ -72,10 +72,10 @@ class HomeScreenState extends State<HomeScreen> {
           child: Icon(Icons.add),
           tooltip: 'Add Todo',
         ),
-        bottomNavigationBar: BottomNavigationWidget(activeTab));
+        bottomNavigationBar: createBottomNavigationWidget(activeTab));
   }
 
-  Widget BottomNavigationWidget(activeTab) => BottomNavigationBar(
+  Widget createBottomNavigationWidget(activeTab) => BottomNavigationBar(
         key: ArchSampleKeys.tabs,
         currentIndex: AppTab.values.indexOf(activeTab),
         onTap: (index) {

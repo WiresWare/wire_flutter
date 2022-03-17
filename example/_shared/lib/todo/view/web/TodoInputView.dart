@@ -10,8 +10,7 @@ class TodoInputView extends DomElement {
     dom
       ..text = ''
       ..onKeyPress.listen((e) async =>
-        e.keyCode == KeyCode.ENTER &&
-          await Wire.send(
+        e.keyCode == KeyCode.ENTER && await Wire.send(
             ViewSignals.INPUT,
             payload: InputDTO(dom.value!, '')
           ));

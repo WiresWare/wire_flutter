@@ -33,8 +33,8 @@ class _WireDataBuilderState<T> extends State<WireDataBuilder> {
   }
 
   Future<void> _onWireData(value) async {
-    if (value != null) this.value = value;
-    setState(() {});
+    if (!this.mounted) return;
+    setState(() { if (value != null) this.value = value; });
   }
 
   @override
@@ -45,7 +45,7 @@ class _WireDataBuilderState<T> extends State<WireDataBuilder> {
   @override
   void dispose() {
     var wireData = Wire.data<T>(widget.dataKey);
-    if (!wireData.isSet && wireData.value == null)
+    if (wireData.isSet == false && wireData.value == null)
       wireData.remove();
     else
       wireData.unsubscribe(_onWireData);

@@ -32,7 +32,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('isEditing ${isEditing}');
+    print('isEditing $isEditing');
     return Scaffold(
       appBar: AppBar(
         title: Text(isEditing ? "Edit Todo" : "Add Todo"),
@@ -45,10 +45,10 @@ class _AddEditScreenState extends State<AddEditScreen> {
             return Future(() => true);
           },
           child: !isEditing
-              ? ListViewWidget(context, null)
+              ? buildListViewWidget(context, null)
               : WireDataBuilder<TodoVO>(
                   dataKey: widget.id!,
-                  builder: (ctx, todoVO) => ListViewWidget(ctx, todoVO),
+                  builder: (ctx, todoVO) => buildListViewWidget(ctx, todoVO),
                 ),
         ),
       ),
@@ -73,7 +73,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
     );
   }
 
-  Widget ListViewWidget(context, todoVO) => ListView(
+  Widget buildListViewWidget(context, todoVO) => ListView(
         children: [
           TextFormField(
             initialValue: todoVO?.text ?? '',

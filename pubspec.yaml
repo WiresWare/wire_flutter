@@ -1,6 +1,6 @@
 name: wire_flutter
 description: Data container layer from Wire for Flutter - WireDataBuilder widget
-version: 1.2.1
+version: 1.2.2
 homepage: https://github.com/WiresWare/wire_flutter
 
 environment:
@@ -50,3 +50,7 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages
+
+false_secrets:
+  - example/wire_flutter_todo/node_modules/grunt-contrib-connect/tasks/certs/server.key
+  - example/wire_flutter_todo/node_modules/node-http2/example/localhost.key

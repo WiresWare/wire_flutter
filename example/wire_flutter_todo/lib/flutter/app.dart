@@ -33,9 +33,9 @@ class ArchSampleTheme {
 
     return ThemeData.dark().copyWith(
       primaryColor: Colors.grey[800],
-      accentColor: Colors.cyan[300],
-      buttonColor: Colors.grey[800],
-      textSelectionColor: Colors.cyan[100],
+      // accentColor: Colors.cyan[300],
+      // buttonColor: Colors.grey[800],
+      // textSelectionColor: Colors.cyan[100],
       toggleableActiveColor: Colors.cyan[300],
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: Colors.cyan[300],

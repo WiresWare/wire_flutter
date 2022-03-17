@@ -10,7 +10,7 @@ class TodoListView extends DomElement {
     var wireDataTodoList = Wire.data(DataKeys.LIST_OF_IDS);
     var todoList = (wireDataTodoList.value as List<String>);
     var append = (id) async {
-      print('> TodoListView -> append id = ${id}');
+      print('> TodoListView -> append id = $id');
       dom.insertBefore(TodoListItemView(id).dom, dom.firstChild);
     };
     if (todoList.isNotEmpty) todoList.forEach(append);
@@ -20,7 +20,7 @@ class TodoListView extends DomElement {
       final list = value as List<String>;
       list.forEach((String id) => { if (!_renderedIds.contains(id)) append(id) });
       _renderedIds = todoList.toList();
-      print('> TodoListView -> wireDataTodoList.subscribe: ${list}');
+      print('> TodoListView -> wireDataTodoList.subscribe: $list');
     });
   }
 }

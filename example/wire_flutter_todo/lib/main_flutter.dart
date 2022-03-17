@@ -11,6 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   Wire.data(DataKeys.STATE, value: TodoApplicationState.LOADING);
+
   // This is a only difference from WEB
   final databaseService = MobileDatabaseService();
   await databaseService.init(TodoModel.STORAGE_KEY);
@@ -20,6 +21,7 @@ Future<void> main() async {
   if (await todoModel.whenReady) {
     print('> Main -> main: todoModel.whenReady');
     TodoController(todoModel);
+
     runApp(TodoAppFlutter());
   }
 
