@@ -1,3 +1,7 @@
+## 1.2.3
+- WireDataBuilder simplified, inner reference to value removed
+- _onWireData setState even when value is null
+
 ## 1.2.2
 - Fix of "setstate() called after dispose()"
 - Todo example with use of WireDataLockToken

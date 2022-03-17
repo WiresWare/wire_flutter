@@ -22,35 +22,28 @@ class WireDataBuilder<T> extends StatefulWidget {
 }
 
 class _WireDataBuilderState<T> extends State<WireDataBuilder> {
-  var value;
-
   @override
   void initState() {
     super.initState();
-    final wireData = Wire.data<T>(widget.dataKey);
-    this.value = wireData.value;
-    wireData.subscribe(_onWireData);
+    Wire.data<T>(widget.dataKey)
+      .subscribe(_onWireData);
   }
 
   Future<void> _onWireData(value) async {
+    // print('> WireDataBuilder ${widget.dataKey} -> _onWireData: value = $value');
     if (!this.mounted) return;
-    setState(() { if (value != null) this.value = value; });
+    setState(() { });
   }
 
   @override
   Widget build(BuildContext context) {
-    return widget.builder(context, value);
+    return widget.builder(context, Wire.data<T>(widget.dataKey).value as T?);
   }
 
   @override
   void dispose() {
-    var wireData = Wire.data<T>(widget.dataKey);
-    if (wireData.isSet == false && wireData.value == null)
-      wireData.remove();
-    else
-      wireData.unsubscribe(_onWireData);
-
-    value = null;
+    Wire.data<T>(widget.dataKey).unsubscribe(_onWireData);
+    // print('> WireDataBuilder ${widget.dataKey} -> dispose');
     super.dispose();
   }
 }
