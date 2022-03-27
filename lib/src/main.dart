@@ -10,13 +10,13 @@ typedef WireDataWidgetBuilder<T> = Widget Function(
 class WireDataBuilder<T> extends StatefulWidget {
   final String dataKey;
   final WireDataWidgetBuilder builder;
-  final bool Function(T)? rebuildCondition;
+  final bool Function(T)? rebuildWhen;
 
   WireDataBuilder({
     Key? key,
     required this.dataKey,
     required this.builder,
-    this.rebuildCondition
+    this.rebuildWhen
   }) : super(key: key);
 
   @override
@@ -33,7 +33,7 @@ class _WireDataBuilderState<T> extends State<WireDataBuilder> {
 
   Future<void> _onWireData(value) async {
     // print('> WireDataBuilder ${widget.dataKey} -> _onWireData: value = $value');
-    if (!this.mounted || (widget.rebuildCondition != null && !widget.rebuildCondition!(value))) return;
+    if (!this.mounted || (widget.rebuildWhen != null && !widget.rebuildWhen!(value))) return;
     setState(() { });
   }
 

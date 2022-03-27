@@ -1,5 +1,5 @@
 ## 1.2.4
-- Optional parameter `rebuildCondition` which determine if setState is triggered thus rebuild will happen or not
+- Optional parameter `rebuildWhen` which determine if setState is triggered on new value therefore rebuild will happen or not
 
 ## 1.2.3
 - WireDataBuilder simplified, inner reference to value removed
