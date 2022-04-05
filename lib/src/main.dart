@@ -3,8 +3,7 @@ library wire;
 import 'package:flutter/widgets.dart';
 import 'package:wire/wire.dart';
 
-typedef WireDataWidgetBuilder<T> = Widget Function(
-    BuildContext context, T value);
+typedef Widget WireDataWidgetBuilder<S>(BuildContext context, S value);
 
 /// WireDataBuilder
 class WireDataBuilder<T> extends StatefulWidget {
@@ -23,7 +22,7 @@ class WireDataBuilder<T> extends StatefulWidget {
   _WireDataBuilderState<T> createState() => _WireDataBuilderState<T>();
 }
 
-class _WireDataBuilderState<T> extends State<WireDataBuilder> {
+class _WireDataBuilderState<T> extends State<WireDataBuilder<T>> {
   @override
   void initState() {
     super.initState();
@@ -39,7 +38,7 @@ class _WireDataBuilderState<T> extends State<WireDataBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.builder(context, Wire.data<T>(widget.dataKey).value as T?);
+    return widget.builder(context, Wire.data<T>(widget.dataKey).value as T);
   }
 
   @override
