@@ -9,7 +9,7 @@ typedef WireDataWidgetBuilder<T> = Widget Function(
 /// WireDataBuilder
 class WireDataBuilder<T> extends StatefulWidget {
   final String dataKey;
-  final WireDataWidgetBuilder builder;
+  final WireDataWidgetBuilder<T> builder;
   final bool Function(T)? rebuildWhen;
 
   WireDataBuilder({

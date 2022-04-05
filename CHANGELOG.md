@@ -1,3 +1,6 @@
+## 1.2.5
+- Specify type of builder function parameter of WireDataWidgetBuilder<T> in WireDataBuilder
+
 ## 1.2.4
 - Optional parameter `rebuildWhen` which determine if setState is triggered on new value therefore rebuild will happen or not
 
