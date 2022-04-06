@@ -1,3 +1,6 @@
+## 1.2.7:
+- Wire updated to min 1.4.5.
+
 ## 1.2.6:
 - Corrections: cast to possible dynamic value in build -> widget.build method replaced with strict T.
 
