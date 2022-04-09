@@ -1,3 +1,6 @@
+## 1.2.9:
+- WireDataBuilder optional property isStatic which skip subscription to he Wire.data(dataKey) and only build component once.
+
 ## 1.2.8:
 - Wire updated to min 1.4.5.
 

@@ -10,12 +10,14 @@ class WireDataBuilder<T> extends StatefulWidget {
   final String dataKey;
   final WireDataWidgetBuilder<T> builder;
   final bool Function(T)? rebuildWhen;
+  final bool isStatic;
 
   WireDataBuilder({
     Key? key,
     required this.dataKey,
     required this.builder,
-    this.rebuildWhen
+    this.rebuildWhen,
+    this.isStatic = false
   }) : super(key: key);
 
   @override
@@ -26,6 +28,7 @@ class _WireDataBuilderState<T> extends State<WireDataBuilder<T>> {
   @override
   void initState() {
     super.initState();
+    if (widget.isStatic) return;
     Wire.data<T>(widget.dataKey)
       .subscribe(_onWireData);
   }
@@ -43,7 +46,9 @@ class _WireDataBuilderState<T> extends State<WireDataBuilder<T>> {
 
   @override
   void dispose() {
-    Wire.data<T>(widget.dataKey).unsubscribe(_onWireData);
+    if (!widget.isStatic) {
+      Wire.data<T>(widget.dataKey).unsubscribe(_onWireData);
+    }
     // print('> WireDataBuilder ${widget.dataKey} -> dispose');
     super.dispose();
   }
