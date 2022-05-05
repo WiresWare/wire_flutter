@@ -1,3 +1,12 @@
+## 1.3.0:
+- Utility mixin MixinWithWireData with shortcuts:
+  - `has/hasNot(String dataKey)` - check for existence of `dataKey` in Wire.data,
+  - `Future<T> get<T>(String dataKey)` - return value of `dataKey` or throw an error (handled from Future.onError), 
+  - `Future<Map<String, dynamic>> getMany` - return list of values or throw an error in case of is absent,
+  - `void update(String dataKey, { dynamic data, bool refresh = true })` - update `Wire.data`
+  - `void reset(String dataKey)` - same as `Wire.data(dataKey).reset`
+- Wire updated to 1.4.7 (with new method `Wire.addMany`)  
+
 ## 1.2.9:
 - WireDataBuilder optional property isStatic which skip subscription to he Wire.data(dataKey) and only build component once.
 

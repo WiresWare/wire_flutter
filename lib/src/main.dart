@@ -1,4 +1,4 @@
-library wire;
+library wire_flutter;
 
 import 'package:flutter/widgets.dart';
 import 'package:wire/wire.dart';
