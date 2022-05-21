@@ -10,8 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   universal_platform: ^1.0.0+1
-  js: ^0.6.3
-  wire: ^1.4.3
+  js: ^0.6.4
+  wire: ^1.4.7
   wire_flutter:
     path: ../..
   wire_example_shared:
@@ -22,8 +22,8 @@ dev_dependencies:
     sdk: flutter
   flutter_driver:
     sdk: flutter
-  build_web_compilers: ^3.2.2
-  build_runner: ^2.1.7
+  build_web_compilers: ^3.2.3
+  build_runner: ^2.1.11
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
