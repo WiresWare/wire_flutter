@@ -28,7 +28,8 @@ class TodoModel {
             if (obj != null) {
               var todoVO = TodoVO.fromJson(obj);
               todoVO.isDeletable = true;
-              // Wire.data<TodoVO>(todoVO.id, value: todoVO).lock(todoItemLockToken);
+              Wire.data<TodoVO>(todoVO.id, value: todoVO);
+                  // .lock(todoItemLockToken);
               idsList.add(todoVO.id);
               if (!todoVO.completed) notCompletedCount++;
             }
@@ -204,8 +205,12 @@ class TodoModel {
 
   void _saveChanges() {
     var listOfTodoVO = [];
-    (Wire.data(DataKeys.LIST_OF_IDS).value as List).forEach((id) =>
-        listOfTodoVO.add(Wire.data(id).value.toJson()));
+    (Wire.data(DataKeys.LIST_OF_IDS).value as List).forEach((id) {
+      final todo = Wire.data(id).value;
+      print('> TodoModel -> id: ${id}, todo = ${todo}');
+      if (todo != null) listOfTodoVO.add(todo.toJson());
+    });
+
     _dbService.save(STORAGE_KEY, listOfTodoVO);
     _dbService.save(STORAGE_KEY_COMPLETE_ALL, Wire.data(DataKeys.COMPLETE_ALL).value as bool);
   }
