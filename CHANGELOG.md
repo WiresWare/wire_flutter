@@ -1,3 +1,7 @@
+## 1.3.1:
+- New WireDataBuilder constructor property WireDataWidgetNullBuilder? nullBuilder
+- Utility mixin MixinWithWireData moved to Wire library and removed from repo
+
 ## 1.3.0:
 - Utility mixin MixinWithWireData with shortcuts:
   - `has/hasNot(String dataKey)` - check for existence of `dataKey` in Wire.data,
