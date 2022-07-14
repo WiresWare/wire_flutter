@@ -16,7 +16,7 @@ class TodoFilterView extends DomElement {
   static const CLASS_NAME_SELECTED = 'selected';
 
   TodoFilterView(UListElement dom) : super(dom) {
-    Wire.data<FilterValues>(DataKeys.FILTER).subscribe((value) async {
+    Wire.data(DataKeys.FILTER).subscribe((value) async {
       final filter = value as FilterValues;
       final selectedChildIndex = _FILTER_TO_VALUE[filter];
       print('> TodoFilterView -> DataKeys.FILTER subscribe: $value - $selectedChildIndex');

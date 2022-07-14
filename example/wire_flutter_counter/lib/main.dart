@@ -7,7 +7,7 @@ import 'const/CounterSignals.dart';
 import 'const/CounterDataKey.dart';
 
 void main() {
-  CounterProcessor();
+  CounterController();
   Wire.data(CounterDataKey.COUNT, value: 0);
   runApp(MyApp());
 }
@@ -45,15 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'You have pushed the button this many times:',
-              ),
-              WireDataBuilder<int>(
-                  dataKey: CounterDataKey.COUNT,
-                  builder: (context, value) => Text(
-                        '$value',
-                        style: Theme.of(context).textTheme.headline4,
-                      ))
+              Text('You have pushed the button this many times:',),
+              WireDataBuilder<int>(dataKey: CounterDataKey.COUNT,
+                builder: (context, value) => Text('$value', style: Theme.of(context).textTheme.headline4,))
             ],
           ),
         ),

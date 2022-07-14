@@ -28,7 +28,7 @@ class TodoModel {
             if (obj != null) {
               var todoVO = TodoVO.fromJson(obj);
               todoVO.isDeletable = true;
-              Wire.data<TodoVO>(todoVO.id, value: todoVO);
+              Wire.data(todoVO.id, value: todoVO);
                   // .lock(todoItemLockToken);
               idsList.add(todoVO.id);
               if (!todoVO.completed) notCompletedCount++;
@@ -43,9 +43,9 @@ class TodoModel {
       print('> TodoModel -> init: count = $notCompletedCount');
       final isCompleteAll = await _dbService.retrieve(STORAGE_KEY_COMPLETE_ALL) ?? notCompletedCount == 0;
 
-      Wire.data<List<String>>(DataKeys.LIST_OF_IDS, value: idsList);
-      Wire.data<int>(DataKeys.COUNT, value: notCompletedCount);
-      Wire.data<bool>(DataKeys.COMPLETE_ALL, value: isCompleteAll);
+      Wire.data(DataKeys.LIST_OF_IDS, value: idsList);
+      Wire.data(DataKeys.COUNT, value: notCompletedCount);
+      Wire.data(DataKeys.COMPLETE_ALL, value: isCompleteAll);
       return Future.value(true);
     });
   }
@@ -54,13 +54,13 @@ class TodoModel {
     final newTodoId = DateTime.now().millisecondsSinceEpoch.toString();
     final newTodoVO = TodoVO(newTodoId, text, note, completed);
     final todoIdsList = Wire.data(DataKeys.LIST_OF_IDS).value!;
-    final count = Wire.data<int>(DataKeys.COUNT).value;
+    final count = Wire.data(DataKeys.COUNT).value;
 
     todoIdsList.add(newTodoId);
 
-    Wire.data<TodoVO>(newTodoVO.id, value: newTodoVO);
-    Wire.data<List<String>>(DataKeys.LIST_OF_IDS, value: todoIdsList);
-    Wire.data<int>(DataKeys.COUNT, value: count + (completed ? 0 : 1));
+    Wire.data(newTodoVO.id, value: newTodoVO);
+    Wire.data(DataKeys.LIST_OF_IDS, value: todoIdsList);
+    Wire.data(DataKeys.COUNT, value: count + (completed ? 0 : 1));
 
     _checkOnCompleteAll();
     _saveChanges();
@@ -70,9 +70,9 @@ class TodoModel {
   }
 
   Future<TodoVO> remove(String id) async {
-    final todoIdsList = Wire.data<List<String>>(DataKeys.LIST_OF_IDS).value!;
-    final count = Wire.data<int>(DataKeys.COUNT).value as int;
-    final wireDataTodoVO = Wire.data<TodoVO>(id);
+    final todoIdsList = Wire.data(DataKeys.LIST_OF_IDS).value!;
+    final count = Wire.data(DataKeys.COUNT).value as int;
+    final wireDataTodoVO = Wire.data(id);
     final todoVO = wireDataTodoVO.value;
 
     todoIdsList.remove(id);
@@ -83,7 +83,7 @@ class TodoModel {
       Wire.data(DataKeys.COUNT, value: count - 1);
     }
 
-    Wire.data<List<String>>(DataKeys.LIST_OF_IDS, value: todoIdsList);
+    Wire.data(DataKeys.LIST_OF_IDS, value: todoIdsList);
 
     _saveChanges();
 
@@ -92,13 +92,12 @@ class TodoModel {
   }
 
   TodoVO update(String id, String text, String note) {
-    final wireDateTodoVO = Wire.data<TodoVO>(id);
-    final todoVO = wireDateTodoVO.value;
+    final wireDateTodoVO = Wire.data(id);
+    final todoVO = wireDateTodoVO.value as TodoVO;
     todoVO.text = text;
     todoVO.note = note;
 
-    wireDateTodoVO
-        .refresh(); // this way won't update middlewares only direct write will: Wire.data<TodoVO>(id, todoVO);
+    wireDateTodoVO.refresh(); // this way won't update middlewares only direct write will: Wire.data<TodoVO>(id, todoVO);
 
     _saveChanges();
 
@@ -149,7 +148,7 @@ class TodoModel {
         Wire.data(id, value: todoVO);
       }
     });
-    Wire.data<FilterValues>(DataKeys.FILTER, value: filter);
+    Wire.data(DataKeys.FILTER, value: filter);
     print('> TodoModel -> filtered: ' + filter.toString());
   }
 
@@ -194,7 +193,7 @@ class TodoModel {
   }
 
   void _checkOnCompleteAll() {
-    final completeAllWireData = Wire.data<bool>(DataKeys.COMPLETE_ALL);
+    final completeAllWireData = Wire.data(DataKeys.COMPLETE_ALL);
     final bool completeAll = completeAllWireData.isSet ? completeAllWireData.value : false;
     print('> TodoModel -> _checkOnCompleteAll: completeAll = $completeAll');
     if (completeAll) {
