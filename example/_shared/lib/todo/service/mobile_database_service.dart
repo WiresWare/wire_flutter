@@ -7,7 +7,7 @@ import 'package:wire_example_shared/todo/service/abstract_database_service.dart'
 class MobileDatabaseService extends IDatabaseService {
   MobileDatabaseService();
 
-  late final Box<List<dynamic>> store;
+  late final Box<List<Map<String, dynamic>>> store;
 
   @override
   Future<bool> init([String? key]) async {
@@ -33,7 +33,6 @@ class MobileDatabaseService extends IDatabaseService {
 
   @override
   Future<dynamic> retrieve(String key) async {
-    print('> MobileDatabaseService -> retrieve: key = $key');
     final result = store.get(key);
     print('> MobileDatabaseService -> retrieve: result = $result');
     return result;
@@ -41,7 +40,6 @@ class MobileDatabaseService extends IDatabaseService {
 
   @override
   void save(String key, dynamic data) {
-    print('> MobileDatabaseService -> save: key = $key');
-    store.put(key, data as List<dynamic>);
+    store.put(key, data as List<Map<String, dynamic>>);
   }
 }
