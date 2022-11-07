@@ -16,7 +16,7 @@ class TodoModel {
           for (final obj in await _dbService.retrieve(STORAGE_KEY) as List) {
             print('> TodoModel -> init: todo = $obj');
             if (obj != null) {
-              final todoVO = TodoVO.fromJson(obj as Map<String, dynamic>);
+              final todoVO = TodoVO.fromJson(obj as Map<dynamic, dynamic>);
               Wire.data(todoVO.id, value: todoVO);
               idsList.add(todoVO.id);
               if (!todoVO.completed) notCompletedCount++;
