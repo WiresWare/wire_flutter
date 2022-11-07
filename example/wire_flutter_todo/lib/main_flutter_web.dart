@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wire/wire.dart';
-import 'package:wire_example_shared/todo/const/ApplicationState.dart';
-import 'package:wire_example_shared/todo/const/DataKeys.dart';
-import 'package:wire_example_shared/todo/controller/TodoController.dart';
-import 'package:wire_example_shared/todo/model/TodoModel.dart';
-import 'package:wire_example_shared/todo/service/WebDatabaseService.dart';
+import 'package:wire_example_shared/todo/const/application_state.dart';
+import 'package:wire_example_shared/todo/const/data_keys.dart';
+import 'package:wire_example_shared/todo/controller/todo_controller.dart';
+import 'package:wire_example_shared/todo/model/todo_model.dart';
+import 'package:wire_example_shared/todo/service/web_database_service.dart';
 import 'package:wire_flutter_todo/flutter/app.dart';
 
 Future<void> main() async {

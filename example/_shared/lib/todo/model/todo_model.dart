@@ -16,7 +16,7 @@ class TodoModel {
           for (final obj in await _dbService.retrieve(STORAGE_KEY) as List) {
             print('> TodoModel -> init: todo = $obj');
             if (obj != null) {
-              final todoVO = TodoVO.fromJson(obj as Map<String, dynamic>);
+              final todoVO = TodoVO.fromJson(obj as Map<dynamic, dynamic>);
               Wire.data(todoVO.id, value: todoVO);
               idsList.add(todoVO.id);
               if (!todoVO.completed) notCompletedCount++;
@@ -203,6 +203,7 @@ class TodoModel {
       listOfTodoVO.add((Wire.data(id).value as TodoVO).toJson());
     }
     _dbService.save(STORAGE_KEY, listOfTodoVO);
-    _dbService.save(STORAGE_KEY_COMPLETE_ALL, Wire.data(DataKeys.COMPLETE_ALL).value as bool);
+    // Can't be store to the same store type on mobile (list)
+    // _dbService.save(STORAGE_KEY_COMPLETE_ALL, Wire.data(DataKeys.COMPLETE_ALL).value as bool);
   }
 }

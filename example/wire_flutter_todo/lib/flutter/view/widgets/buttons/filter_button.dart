@@ -3,7 +3,7 @@
 // in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:wire_example_shared/todo/const/FilterValues.dart';
+import 'package:wire_example_shared/todo/const/filter_values.dart';
 import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
 
 class FilterButton extends StatelessWidget {
@@ -11,20 +11,14 @@ class FilterButton extends StatelessWidget {
   final FilterValues activeFilter;
   final bool isActive;
 
-  FilterButton(
-      {required this.onSelected,
-      required this.activeFilter,
-      required this.isActive,
-      Key? key})
+  FilterButton({required this.onSelected, required this.activeFilter, required this.isActive, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final defaultStyle = Theme.of(context).textTheme.bodyText1;
-    final activeStyle = Theme.of(context)
-        .textTheme
-        .bodyText1!
-        .copyWith(color: Theme.of(context).primaryColor);
+    final defaultStyle =
+        Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).secondaryHeaderColor);
+    final activeStyle = Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).primaryColor);
     final button = _Button(
       onSelected: onSelected,
       activeFilter: activeFilter,
@@ -66,8 +60,7 @@ class _Button extends StatelessWidget {
           value: FilterValues.ALL,
           child: Text(
             'Show All',
-            style:
-                activeFilter == FilterValues.ALL ? activeStyle : defaultStyle,
+            style: activeFilter == FilterValues.ALL ? activeStyle : defaultStyle,
           ),
         ),
         PopupMenuItem<FilterValues>(
@@ -75,9 +68,7 @@ class _Button extends StatelessWidget {
           value: FilterValues.ACTIVE,
           child: Text(
             'Show Active',
-            style: activeFilter == FilterValues.ACTIVE
-                ? activeStyle
-                : defaultStyle,
+            style: activeFilter == FilterValues.ACTIVE ? activeStyle : defaultStyle,
           ),
         ),
         PopupMenuItem<FilterValues>(
@@ -85,9 +76,7 @@ class _Button extends StatelessWidget {
           value: FilterValues.COMPLETED,
           child: Text(
             'Show Completed',
-            style: activeFilter == FilterValues.COMPLETED
-                ? activeStyle
-                : defaultStyle,
+            style: activeFilter == FilterValues.COMPLETED ? activeStyle : defaultStyle,
           ),
         ),
       ],

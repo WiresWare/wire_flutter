@@ -3,16 +3,16 @@
 // in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:wire_example_shared/todo/const/DataKeys.dart';
+import 'package:wire/wire.dart';
+import 'package:wire_example_shared/todo/const/application_state.dart';
+import 'package:wire_example_shared/todo/const/data_keys.dart';
+import 'package:wire_example_shared/todo/const/view_signals.dart';
+import 'package:wire_example_shared/todo/data/dto/input_dto.dart';
+import 'package:wire_example_shared/todo/data/vo/todo_vo.dart';
+import 'package:wire_flutter/wire_flutter.dart';
 import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
-import 'package:wire_example_shared/todo/const/ViewSignals.dart';
-import 'package:wire_example_shared/todo/const/ApplicationState.dart';
-import 'package:wire_example_shared/todo/data/dto/InputDTO.dart';
-import 'package:wire_example_shared/todo/data/vo/TodoVO.dart';
 import 'package:wire_flutter_todo/flutter/view/screens/detail_screen.dart';
 import 'package:wire_flutter_todo/flutter/view/widgets/list/todo_item_widget.dart';
-import 'package:wire/wire.dart';
-import 'package:wire_flutter/wire_flutter.dart';
 
 class TodoList extends StatelessWidget {
   TodoList() : super(key: ArchSampleKeys.todoList);
@@ -40,20 +40,21 @@ class TodoList extends StatelessWidget {
                         _removeTodo(context, todoId);
                       },
                       child: TodoItem(
-                        id: todoId,
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => DetailScreen(id: todoId,
-                                onDelete: () => { _removeTodo(context, todoId) },
+                          id: todoId,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => DetailScreen(
+                                  id: todoId,
+                                  onDelete: () => {_removeTodo(context, todoId)},
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        onToggle: (value) {
-                          print('> TodoItem click $todoId');
-                          Wire.send(ViewSignals.TOGGLE, payload: todoId);
-                        }),
+                            );
+                          },
+                          onToggle: (value) {
+                            print('> TodoItem click $todoId');
+                            Wire.send(ViewSignals.TOGGLE, payload: todoId);
+                          }),
                     );
                   },
                 ),
@@ -78,8 +79,8 @@ class TodoList extends StatelessWidget {
         ),
         action: SnackBarAction(
             label: 'Undo',
-            onPressed: () => Wire.send(ViewSignals.INPUT,
-                payload: InputDTO(todoVO.text, todoVO.note, todoVO.completed))),
+            onPressed: () =>
+                Wire.send(ViewSignals.INPUT, payload: InputDTO(todoVO.text, todoVO.note, todoVO.completed))),
       ),
     );
   }

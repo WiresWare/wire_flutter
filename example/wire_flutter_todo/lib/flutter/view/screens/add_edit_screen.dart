@@ -6,10 +6,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:wire/wire.dart';
-import 'package:wire_example_shared/todo/const/ViewSignals.dart';
-import 'package:wire_example_shared/todo/data/dto/EditDTO.dart';
-import 'package:wire_example_shared/todo/data/dto/InputDTO.dart';
-import 'package:wire_example_shared/todo/data/vo/TodoVO.dart';
+import 'package:wire_example_shared/todo/const/view_signals.dart';
+import 'package:wire_example_shared/todo/data/dto/edit_dto.dart';
+import 'package:wire_example_shared/todo/data/dto/input_dto.dart';
+import 'package:wire_example_shared/todo/data/vo/todo_vo.dart';
 import 'package:wire_flutter/wire_flutter.dart';
 import 'package:wire_flutter_todo/flutter/const/ArchSampleKeys.dart';
 
