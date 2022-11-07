@@ -199,7 +199,7 @@ class TodoModel {
   }
 
   void _saveChanges() {
-    final List<Map<String, dynamic>> listOfTodoVO = [];
+    final List<Map<dynamic, dynamic>> listOfTodoVO = [];
     for (final id in Wire.data(DataKeys.LIST_OF_IDS).value as List<String>) {
       listOfTodoVO.add((Wire.data(id).value as TodoVO).toJson());
     }
