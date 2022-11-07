@@ -203,6 +203,6 @@ class TodoModel {
       listOfTodoVO.add((Wire.data(id).value as TodoVO).toJson());
     }
     _dbService.save(STORAGE_KEY, listOfTodoVO);
-    _dbService.save(STORAGE_KEY_COMPLETE_ALL, Wire.data(DataKeys.COMPLETE_ALL).value as bool);
+    // _dbService.save(STORAGE_KEY_COMPLETE_ALL, Wire.data(DataKeys.COMPLETE_ALL).value as bool);
   }
 }
