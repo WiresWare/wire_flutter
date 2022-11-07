@@ -1,25 +1,25 @@
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../data/vo/TodoVO.dart';
-import 'IDatabaseService.dart';
+import 'package:wire_example_shared/todo/data/vo/todo_vo.dart';
+import 'package:wire_example_shared/todo/service/abstract_database_service.dart';
 
 class MobileDatabaseService extends IDatabaseService {
   MobileDatabaseService();
 
-  late final store;
+  late final Box<List<Map<String, dynamic>>> store;
 
   @override
   Future<bool> init([String? key]) async {
-    var dir = await getApplicationDocumentsDirectory();
+    final dir = await getApplicationDocumentsDirectory();
     await dir.create(recursive: true);
     Hive.init(dir.path);
     store = await Hive.openBox('todos');
-    if (!this.exist(key!)) {
+    if (!exist(key!)) {
       store.put(key, [
-        new TodoVO('1', 'Read', 'books, journals, articles', false).toJson(),
-        new TodoVO('2', 'Write', 'books, journals, articles', false).toJson(),
-        new TodoVO('3', 'Travel', 'London, New York, Paris', false).toJson()
+        TodoVO('1', 'Read', 'books, journals, articles', false).toJson(),
+        TodoVO('2', 'Write', 'books, journals, articles', false).toJson(),
+        TodoVO('3', 'Travel', 'London, New York, Paris', false).toJson()
       ]);
     }
     print('> MobileDatabaseService -> init: key = $key');
@@ -40,6 +40,6 @@ class MobileDatabaseService extends IDatabaseService {
 
   @override
   void save(String key, dynamic data) {
-    store.put(key, data);
+    store.put(key, data as List<Map<String, dynamic>>);
   }
 }

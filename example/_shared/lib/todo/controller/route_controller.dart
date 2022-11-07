@@ -1,8 +1,8 @@
 import 'dart:html';
 
 import 'package:wire/wire.dart';
-import 'package:wire_example_shared/todo/const/FilterValues.dart';
-import 'package:wire_example_shared/todo/const/ViewSignals.dart';
+import 'package:wire_example_shared/todo/const/filter_values.dart';
+import 'package:wire_example_shared/todo/const/view_signals.dart';
 
 class RouteController {
   RouteController() {
@@ -13,7 +13,7 @@ class RouteController {
   }
 
   void checkFilterRouterChanged() {
-    var filter;
+    FilterValues? filter;
     switch (window.location.hash) {
       case '#/':
         filter = FilterValues.ALL;

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:html';
 
-import 'IDatabaseService.dart';
+import 'package:wire_example_shared/todo/service/abstract_database_service.dart';
 
 class WebDatabaseService extends IDatabaseService {
   @override

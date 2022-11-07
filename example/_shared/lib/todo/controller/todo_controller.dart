@@ -1,14 +1,12 @@
 import 'package:wire/wire.dart';
-import 'package:wire_example_shared/todo/const/DataKeys.dart';
-
-import '../const/FilterValues.dart';
-import '../const/ViewSignals.dart';
-import '../data/dto/InputDTO.dart';
-import '../model/TodoModel.dart';
-import '../data/dto/EditDTO.dart';
+import 'package:wire_example_shared/todo/const/data_keys.dart';
+import 'package:wire_example_shared/todo/const/filter_values.dart';
+import 'package:wire_example_shared/todo/const/view_signals.dart';
+import 'package:wire_example_shared/todo/data/dto/edit_dto.dart';
+import 'package:wire_example_shared/todo/data/dto/input_dto.dart';
+import 'package:wire_example_shared/todo/model/todo_model.dart';
 
 class TodoController {
-  TodoModel todoModel;
   TodoController(this.todoModel) {
 //    Wire.add(this, ViewSignals.INPUT, (String payload, int wireId) {
 //      final text = payload;
@@ -33,10 +31,10 @@ class TodoController {
     Wire.add(this, ViewSignals.CLEAR_COMPLETED, _signalProcessor);
     Wire.add(this, ViewSignals.COMPLETE_ALL, _signalProcessor);
 
-    Wire.data(DataKeys.GET_COUNT_COMPLETED, getter: (WireData that) {
+    Wire.data(DataKeys.GET_COUNT_COMPLETED, getter: (that) {
       final listOfAllTodosWireData = Wire.data(DataKeys.LIST_OF_IDS);
       final notCompletedCountWireData = Wire.data(DataKeys.COUNT);
-      final int notCompletedCount = notCompletedCountWireData.value;
+      final int notCompletedCount = notCompletedCountWireData.value as int;
       listOfAllTodosWireData.subscribe(that.refresh);
       notCompletedCountWireData.subscribe(that.refresh);
       return (listOfAllTodosWireData.value as List).length - notCompletedCount;
@@ -45,15 +43,17 @@ class TodoController {
     print('Processor Ready');
   }
 
+  TodoModel todoModel;
+
   Future<void> _signalProcessor(dynamic payload, int wireId) async {
     final wire = Wire.get(wireId: wireId).single;
-    print('> TodoProcessor -> ${wire!.signal}: data = ' + payload.toString());
+    print('> TodoProcessor -> ${wire.signal}: data = $payload');
     switch (wire.signal) {
       case ViewSignals.INPUT:
-        var inputDTO = payload as InputDTO;
-        var text = inputDTO.text;
-        var note = inputDTO.note;
-        var completed = inputDTO.completed;
+        final inputDTO = payload as InputDTO;
+        final text = inputDTO.text;
+        final note = inputDTO.note;
+        final completed = inputDTO.completed;
         if (text.isNotEmpty) {
           todoModel.create(text, note, completed);
           Wire.send(ViewSignals.CLEAR_INPUT);
@@ -62,10 +62,10 @@ class TodoController {
         }
         break;
       case ViewSignals.EDIT:
-        var editTodoDTO = payload as EditDTO;
-        var todoText = editTodoDTO.text;
-        var todoNote = editTodoDTO.note;
-        var todoId = editTodoDTO.id;
+        final editTodoDTO = payload as EditDTO;
+        final todoText = editTodoDTO.text;
+        final todoNote = editTodoDTO.note;
+        final todoId = editTodoDTO.id;
         if (todoText.isEmpty) {
           todoModel.remove(todoId);
         } else {
@@ -73,22 +73,22 @@ class TodoController {
         }
         break;
       case ViewSignals.TOGGLE:
-        var todoId = payload as String;
+        final todoId = payload as String;
         todoModel.toggle(todoId);
         break;
       case ViewSignals.DELETE:
-        var todoId = payload as String;
+        final todoId = payload as String;
         todoModel.remove(todoId);
         break;
       case ViewSignals.FILTER:
-        var filter = payload as FilterValues;
+        final filter = payload as FilterValues;
         todoModel.filter(filter);
         break;
       case ViewSignals.CLEAR_COMPLETED:
         todoModel.clearCompleted();
         break;
       case ViewSignals.COMPLETE_ALL:
-        var completed = payload as bool;
+        final completed = payload as bool;
         todoModel.setCompletionToAll(completed);
         break;
     }
