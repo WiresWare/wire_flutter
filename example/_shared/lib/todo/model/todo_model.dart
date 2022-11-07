@@ -94,7 +94,8 @@ class TodoModel {
     todoVO.text = text;
     todoVO.note = note;
 
-    wireDateTodoVO.refresh(); // this way won't update middlewares only direct write will: Wire.data<TodoVO>(id, todoVO);
+    wireDateTodoVO
+        .refresh(); // this way won't update middlewares only direct write will: Wire.data<TodoVO>(id, todoVO);
 
     _saveChanges();
 
@@ -203,6 +204,7 @@ class TodoModel {
       listOfTodoVO.add((Wire.data(id).value as TodoVO).toJson());
     }
     _dbService.save(STORAGE_KEY, listOfTodoVO);
+    // Can't save to the same storage type on mobile
     // _dbService.save(STORAGE_KEY_COMPLETE_ALL, Wire.data(DataKeys.COMPLETE_ALL).value as bool);
   }
 }

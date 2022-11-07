@@ -1,6 +1,6 @@
 class TodoVO {
   TodoVO(this.id, this.text, this.note, this.completed);
-  TodoVO.fromJson(Map<dynamic, dynamic> json)
+  TodoVO.fromJson(Map<String, dynamic> json)
     : id = json['id'] as String,
       text = json['text'] as String,
       note = json['note'] as String,
@@ -13,7 +13,7 @@ class TodoVO {
 
   bool visible = true;
 
-  Map<dynamic, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
     'id': id,
     'text': text,
     'note': note,
