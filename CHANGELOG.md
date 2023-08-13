@@ -1,3 +1,7 @@
+## 1.3.2:
+- Dependencies update: Wire library version 1.5.4 
+- Examples checked for run and updated as well to wire 1.5.4
+
 ## 1.3.1:
 - New WireDataBuilder constructor property WireDataWidgetNullBuilder? nullBuilder
 - Utility mixin MixinWithWireData moved to Wire library and removed from repo
