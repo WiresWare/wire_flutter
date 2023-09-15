@@ -5,17 +5,18 @@ import 'const/CounterSignals.dart';
 
 class CounterController {
   CounterController() {
-    Wire.add(this, CounterSignal.INCREASE, (data, wid) async {
-      print('> Processor: INCREASE -> handle: ' + data.toString());
-      Wire.data(CounterDataKey.COUNT, value: (value) {
-        return value + 1;
+    Wire.add(this, CounterSignal.INCREASE, (_, wid) async {
+      // print('> Processor: INCREASE -> handle: ' + _.toString());
+      Wire.data(CounterDataKey.COUNT, value: (prev) {
+        return prev + 1;
       });
     });
 
-    Wire.add(this, CounterSignal.DECREASE, (data, wid) async {
-      print('> Processor: DECREASE -> handle: ' + data.toString());
-      Wire.data(CounterDataKey.COUNT,
-          value: (value) => value > 0 ? value - 1 : 0);
+    Wire.add(this, CounterSignal.DECREASE, (_, wid) async {
+      // print('> Processor: DECREASE -> handle: ' + _.toString());
+      Wire.data(CounterDataKey.COUNT, value: (prev) {
+        return prev > 0 ? prev - 1 : 0;
+      });
     });
 
     print('Processor Ready');
