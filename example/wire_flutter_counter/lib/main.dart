@@ -50,10 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               WireDataBuilder<int>(
                   dataKey: CounterDataKey.COUNT,
-                  builder: (context, value) => Text(
-                        '$value',
-                        style: Theme.of(context).textTheme.headline4,
-                      ))
+                  builder: (context, value) {
+                    return Text(
+                      '$value',
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  })
             ],
           ),
         ),
