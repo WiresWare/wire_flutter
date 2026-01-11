@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  wire: ^1.5.4
+  wire: ^1.6.0
 
 dev_dependencies:
   flutter_test:
