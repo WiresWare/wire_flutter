@@ -1,5 +1,5 @@
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:html';
+import 'package:web/web.dart';
 
 import 'package:wire/wire.dart';
 import 'package:wire_example_shared/todo/controller/route_controller.dart';
@@ -23,10 +23,10 @@ Future<void> main() async {
     TodoAppWeb();
   } else {
     print('> Main -> main: todoModel.whenReady = false');
-    document.querySelector('#todoapp')
+    (window.document.querySelector('#todoapp') as HTMLElement?)
       ?..innerHtml = '<h2>Error during model initialization</h2>'
       ..style.textAlign = 'center'
       ..style.padding = '2rem 0';
   }
-  document.querySelector('#loading')?.remove();
+  window.document.querySelector('#loading')?.remove();
 }

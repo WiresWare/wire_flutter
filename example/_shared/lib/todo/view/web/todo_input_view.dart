@@ -16,7 +16,7 @@ class TodoInputView extends DomElement {
         'keyup',
         (KeyboardEvent e) {
           print('> TodoInputView -> keyup: ${e}');
-          if (e.keyCode == KeyCode.ENTER) {
+          if (e.key == 'Enter') {
             _onInputEnter();
           }
         }.toJS,

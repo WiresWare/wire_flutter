@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:js_interop';
 import 'package:web/web.dart';
 
 import 'package:wire/wire.dart';
@@ -9,20 +10,29 @@ import 'package:wire_example_shared/todo/data/vo/todo_vo.dart';
 import 'package:wire_example_shared/todo/view/web/base/dom_element_view.dart';
 
 class TodoListItemView extends DomElement {
-  TodoListItemView(String id) : super(HTMLLIElement()) {
+  TodoListItemView(String id) : super(document.createElement('li') as HTMLLIElement) {
     dom.id = id;
-    listeners.addAll([
-      inpToggle.onClick.listen((MouseEvent e) => Wire.send(ViewSignals.TOGGLE, payload: id)),
-      btnDelete.onClick.listen((MouseEvent e) => Wire.send(ViewSignals.DELETE, payload: id)),
-      inpEdit.onKeyDown.listen((KeyboardEvent e) {
-        if (e.keyCode == KeyCode.ENTER) {
-          Wire.send(ViewSignals.EDIT, payload: getEditData());
-        } else if (e.keyCode == KeyCode.ESC)
-          _OnEditCancel();
-      }),
-      lblContent.onDoubleClick.listen((_) => _OnEditBegin()),
-      inpEdit.onBlur.listen((_) => _OnEditCancel()),
-    ]);
+
+    inpToggle.addEventListener('click', (event) {
+      Wire.send(ViewSignals.TOGGLE, payload: id);
+    }.toJS);
+    btnDelete.addEventListener('click', (event) {
+      Wire.send(ViewSignals.DELETE, payload: id);
+    }.toJS);
+    inpEdit.addEventListener('keydown', (Event event) {
+      final e = event as KeyboardEvent;
+      if (e.key == 'Enter') {
+        Wire.send(ViewSignals.EDIT, payload: getEditData());
+      } else if (e.key == 'Escape') {
+        _OnEditCancel();
+      }
+    }.toJS);
+    lblContent.addEventListener('dblclick', (event) {
+      _OnEditBegin();
+    }.toJS);
+    inpEdit.addEventListener('blur', (event) {
+      _OnEditCancel();
+    }.toJS);
 
     final wdTodo = Wire.data(id);
     wdTodo.subscribe(_OnDataChanged);
@@ -37,29 +47,24 @@ class TodoListItemView extends DomElement {
     if (wdTodo.isSet) _OnDataChanged(wdTodo.value);
   }
 
-  final inpToggle = HTMLInputElement()
+  final inpToggle = (document.createElement('input') as HTMLInputElement)
     ..className = 'toggle'
     ..type = 'checkbox';
 
-  final lblContent = HTMLLabelElement()..className = 'todo-content';
-  final btnDelete = HTMLButtonElement()..className = 'destroy';
-  final inpEdit = HTMLInputElement()..className = 'edit';
-  final container = HTMLDivElement()..className = 'view';
-  final listeners = <StreamSubscription<dynamic>>[];
+  final lblContent = document.createElement('label') as HTMLLabelElement..className = 'todo-content';
+  final btnDelete = document.createElement('button') as HTMLButtonElement..className = 'destroy';
+  final inpEdit = (document.createElement('input') as HTMLInputElement)..className = 'edit';
+  final container = document.createElement('div') as HTMLDivElement..className = 'view';
 
   void remove() {
     final wdTodo = Wire.data(dom.id);
     final hasListener = wdTodo.hasListener(_OnDataChanged);
     if (hasListener) wdTodo.unsubscribe(listener: _OnDataChanged, immediate: true);
-    // print('> TodoListItemView -> remove: hasListener = ${hasListener}');
-    listeners.removeWhere((element) {
-      element.cancel();
-      return true;
-    });
     container.remove();
     inpEdit.remove();
     dom.remove();
   }
+
 
   void update(TodoVO todoVO) {
     dom.id = todoVO.id;
