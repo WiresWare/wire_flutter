@@ -1,11 +1,10 @@
-import 'dart:html';
 import 'package:wire/wire.dart';
 import 'package:wire_example_shared/todo/const/data_keys.dart';
 import 'package:wire_example_shared/todo/view/web/base/dom_element_view.dart';
 import 'package:wire_example_shared/todo/view/web/todo_list_item_view.dart';
 
 class TodoListView extends DomElement {
-  TodoListView(UListElement dom) : super(dom) {
+  TodoListView(super.dom) {
     final wireDataTodoList = Wire.data(DataKeys.LIST_OF_IDS);
     final todoList = wireDataTodoList.value as List<String>;
 

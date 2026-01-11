@@ -1,14 +1,18 @@
-import 'dart:html';
-
+import 'dart:js_interop';
+import 'package:web/web.dart';
 import 'package:wire/wire.dart';
 import 'package:wire_example_shared/todo/const/filter_values.dart';
 import 'package:wire_example_shared/todo/const/view_signals.dart';
 
 class RouteController {
   RouteController() {
-    window.onHashChange.listen((e) {
-      checkFilterRouterChanged();
-    });
+    window.addEventListener(
+      'hashchange',
+      (HashChangeEvent event) {
+        print('> RouteController -> hashchange: ${event}');
+        checkFilterRouterChanged();
+      }.toJS,
+    );
     checkFilterRouterChanged();
   }
 
@@ -25,6 +29,9 @@ class RouteController {
         filter = FilterValues.COMPLETED;
         break;
     }
-    if (filter != null) Wire.send(ViewSignals.FILTER, payload: filter);
+    if (filter != null) {
+      print('> RouteController -> checkFilterRouterChanged - filter: $filter');
+      Wire.send(ViewSignals.FILTER, payload: filter);
+    }
   }
 }

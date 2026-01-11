@@ -1,7 +1,7 @@
-import 'dart:html';
+import 'package:web/web.dart';
 
 class DomElement {
   DomElement(this._dom);
-  final Element _dom;
-  Element get dom => _dom;
+  final HTMLElement _dom;
+  HTMLElement get dom => _dom;
 }
